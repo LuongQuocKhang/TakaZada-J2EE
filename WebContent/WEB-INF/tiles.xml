@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE tiles-definitions PUBLIC  
+      "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+      "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+<tiles-definitions>  
+ 
+   <!-- Base Define -->
+   <definition name="base.definition" 
+       template="/WEB-INF/Shared/_Layout.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="libary" value="/WEB-INF/Shared/libary.jsp" />  
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />  
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" />  
+   </definition>  
+ 
+   <!-- Home Page -->
+   <definition name="homePage" extends="base.definition">
+       <put-attribute name="title" value="Home Page" />  
+       <put-attribute name="body" value="/WEB-INF/View/Index.jsp" />  
+   </definition>  
+   
+   <!-- List computer -->
+   <definition name="ListComputer" extends="base.definition">
+       <put-attribute name="title" value="Computer list" />  
+       <put-attribute name="body" value="/WEB-INF/View/Computer/ListComputer.jsp" />  
+   </definition>  
+   
+   <!-- List case -->
+   <definition name="ListCase" extends="base.definition">
+       <put-attribute name="title" value="case list" />  
+       <put-attribute name="body" value="/WEB-INF/View/Case/ListCase.jsp" />  
+   </definition> 
+</tiles-definitions>

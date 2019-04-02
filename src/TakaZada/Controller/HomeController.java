@@ -1,46 +1,62 @@
 package TakaZada.Controller;
-import TakaZada.Handle.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 
-import org.apache.jasper.tagplugins.jstl.core.Out;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import TakaZada.API.CPUService;
+import TakaZada.API.CaseService;
+import TakaZada.API.ComputerService;
+import TakaZada.API.RAMService;
+import TakaZada.API.VGAService;
+import TakaZada.Model.CPU;
+import TakaZada.Model.Case;
+import TakaZada.Model.Computer;
+import TakaZada.Model.RAM;
+import TakaZada.Model.VGA;
+
 @Controller
 public class HomeController {
-	@RequestMapping(value = "/" , method = RequestMethod.GET)
-	public String home()
+	RAMService _ramService;
+	VGAService _vgaService;
+	CPUService _cpuService;
+	CaseService _caseService;
+	ComputerService _computerService;	
+	
+	public HomeController()
+	{
+		_ramService = new RAMService();
+		_vgaService = new VGAService();
+		_cpuService = new CPUService();
+		_caseService = new CaseService();
+		_computerService = new ComputerService();	
+	}
+	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
+	public String home(@Autowired HttpServletRequest request)
+	{			
+		ArrayList<RAM> listram = _ramService.Load();
+		ArrayList<VGA> listvga = _vgaService.Load();
+		ArrayList<CPU> listcpu = _cpuService.Load();
+		ArrayList<Case> listcase = _caseService.Load();
+		ArrayList<Computer> listconmupter = _computerService.Load();
+		
+		request.setAttribute("ListRAM", listram);
+		request.setAttribute("ListVGA", listvga);
+		request.setAttribute("ListCPU", listcpu);
+		request.setAttribute("ListCase", listcase);
+		request.setAttribute("ListComputer", listconmupter);
+		
+		request.setAttribute("domainname", request.getContextPath());
+		return "homePage";
+	}
+	@RequestMapping(value = {"/Login"}, method = RequestMethod.GET)
+	public String Login(@Autowired HttpServletRequest request)
 	{	
-		try {
-			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			Statement statement = connection.createStatement();
-		    String sql = "Select * from Computer";
-		      
-			ResultSet rs = statement.executeQuery(sql);
-
-			 while (rs.next()) {// Di chuyển con trỏ xuống bản ghi kế tiếp.
-		          int Id = rs.getInt(1);
-		          String computername = rs.getString(2);
-		          String image = rs.getString("Image");
-		          System.out.println("--------------------");
-		          System.out.println("Id:" + Id);
-		          System.out.println("EmpNo:" + computername);
-		          System.out.println("image:" + image);
-		      }
-			 
-			System.out.println(connection);
-			
-			connection.close();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "Index";
+		return "Login";
 	}
 }

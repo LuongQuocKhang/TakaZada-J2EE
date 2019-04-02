@@ -1,0 +1,17 @@
+﻿.bordertab {
+    padding: 35px;
+    border: 1px solid black;
+    font-family: Arial;
+    font-size: 18px;
+    margin: 30px;
+}
+.content-detail {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 black;
+}
+strong {
+    font-size: 30px;
+}

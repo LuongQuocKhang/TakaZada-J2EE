@@ -4,15 +4,15 @@ public class RAM {
 
     public int Id ;
 
-    public String Name ;
+    public String Name;
 
-    public String Image ;
+    public String Image;
 
-    public String Description ;
+    public String Description;
 
-    public String TradeMark ;
+    public String TradeMark;
 
-    public String Color ;
+    public String Color;
 
     public String RamType ;
 

@@ -1,3 +1,8 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/Shared/_Login.jsp=UTF-8
+encoding//WebContent/WEB-INF/Shared/_header.jsp=UTF-8
+encoding//WebContent/WEB-INF/Shared/_navigation.jsp=UTF-8
+encoding//WebContent/WEB-INF/View/Index.jsp=UTF-8
+encoding//src/TakaZada/API/ComputerService.java=UTF-8
 encoding//src/TakaZada/Controller/HomeController.java=UTF-8
 encoding//src/TakaZada/Handle/SQLServerConnUtils_JTDS.java=UTF-8
