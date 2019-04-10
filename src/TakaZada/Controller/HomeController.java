@@ -1,7 +1,11 @@
 package TakaZada.Controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
+import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import TakaZada.API.AdminService;
 import TakaZada.API.CPUService;
 import TakaZada.API.CaseService;
 import TakaZada.API.ComputerService;
@@ -27,6 +32,7 @@ public class HomeController {
 	CPUService _cpuService;
 	CaseService _caseService;
 	ComputerService _computerService;	
+	AdminService _adminService;
 	
 	public HomeController()
 	{
@@ -35,6 +41,7 @@ public class HomeController {
 		_cpuService = new CPUService();
 		_caseService = new CaseService();
 		_computerService = new ComputerService();	
+		_adminService = new AdminService();
 	}
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
 	public String home(@Autowired HttpServletRequest request)
@@ -54,9 +61,38 @@ public class HomeController {
 		request.setAttribute("domainname", request.getContextPath());
 		return "homePage";
 	}
-	@RequestMapping(value = {"/Login"}, method = RequestMethod.GET)
-	public String Login(@Autowired HttpServletRequest request)
+	@RequestMapping(value = {"/Login"}, method = RequestMethod.POST)
+	public String Login(HttpServletRequest request)
 	{	
-		return "Login";
+		String email = (String) request.getParameter("Email");
+		String password = (String) request.getParameter("Password");
+		
+		if ( _adminService.LogIn(request,email, password))
+		{
+			request.getSession().setAttribute("USER_SESSION", _adminService.GetUserByEmail(email));
+		}
+		return "redirect:/";
+	}
+	@RequestMapping(value = {"/Register"}, method = RequestMethod.POST)
+	public String Register(HttpServletRequest request)
+	{	
+		String Email = (String) request.getParameter("EmailRes"),FirstName = (String) request.getParameter("FirstName"),LastName = (String) request.getParameter("LastName");
+		String Password = (String) request.getParameter("PasswordPes"),ComfirmPas = (String) request.getParameter("ComfirmPassword");
+		String Phonenumber = (String) request.getParameter("Phonenumber"), Sex = (String) request.getParameter("Sex"), Address = (String) request.getParameter("Address");
+		String DateOfBirth = (String)request.getParameter("DateOfBirth");
+		java.util.Date time = new Date();
+		if ( Password.equals(ComfirmPas) == false)
+			return "redirect:/";
+		try {
+			SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			 time = format1.parse(DateOfBirth + " 00:00:00");
+		}
+		catch(Exception e) {}
+		java.sql.Date sqlStartDate = new java.sql.Date(time.getTime());  
+		 if ( _adminService.register(FirstName, LastName,Email, Password, Phonenumber,Sex,sqlStartDate, Address))
+         {
+			 return "redirect:/";
+         }
+		return "redirect:/";
 	}
 }

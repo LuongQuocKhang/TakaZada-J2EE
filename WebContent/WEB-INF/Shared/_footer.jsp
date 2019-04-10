@@ -21,20 +21,11 @@
                         <li><a href="products.html">Special Products</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 w3_footer_grid">
-                    <h3>Category</h3>
-                    <ul class="info">
-                        <li><a href="dresses.html">Dresses</a></li>
-                        <li><a href="sweaters.html">Sweaters</a></li>
-                        <li><a href="shirts.html">Shirts</a></li>
-                        <li><a href="sarees.html">Sarees</a></li>
-                        <li><a href="skirts.html">Shorts & Skirts</a></li>
-                    </ul>
-                </div>
+               
                 <div class="col-md-3 w3_footer_grid">
                     <h3>Profile</h3>
                     <ul class="info">
-                        <li><a href="products.html">Summer Store</a></li>
+                        
                         <li><a href="checkout.html">My Cart</a></li>
                     </ul>
                     <h4>Follow Us</h4>

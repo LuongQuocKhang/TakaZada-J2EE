@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import TakaZada.Model.CPU;
 import TakaZada.Handle.SQLServerConnUtils_JTDS;
+import TakaZada.Interface.ICPUReponsitory;
+import TakaZada.Interface.ILoadCPU;
 
 public class CPUService implements ILoadCPU, ICPUReponsitory {
 
@@ -228,8 +230,8 @@ public class CPUService implements ILoadCPU, ICPUReponsitory {
 		ArrayList<TakaZada.Model.CPU> cpulist = new ArrayList<TakaZada.Model.CPU>();
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("select * from cpu where Name = ?");
-			statement.setString(1,name);	
+			PreparedStatement statement = connection.prepareStatement("select * from cpu where Name like ?");
+			statement.setString(1, "%" + name + "%");	
 		      
 			ResultSet rs = statement.executeQuery();
 
@@ -274,7 +276,7 @@ public class CPUService implements ILoadCPU, ICPUReponsitory {
 		ArrayList<TakaZada.Model.CPU> cpulist = new ArrayList<TakaZada.Model.CPU>();
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("select * from cpu where Trademark = ?");
+			PreparedStatement statement = connection.prepareStatement("select * from cpu where TradeMark = ?");
 			statement.setString(1,Trademark);	
 		      
 			ResultSet rs = statement.executeQuery();
@@ -312,5 +314,48 @@ public class CPUService implements ILoadCPU, ICPUReponsitory {
 		}
 		return cpulist;
 	}
+	@Override
+	public ArrayList<CPU> LoadTheSameTrademark(String Trademark,int Id) {
+		ArrayList<TakaZada.Model.CPU> cpulist = new ArrayList<TakaZada.Model.CPU>();
+		try {
+			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
+			PreparedStatement statement = connection.prepareStatement("select * from cpu where Trademark = ? and Id != ?");
+			statement.setString(1,Trademark);	
+			statement.setInt(2,Id);
+			
+			ResultSet rs = statement.executeQuery();
 
+			 while (rs.next()) 
+			 {
+				 TakaZada.Model.CPU _cpu = new TakaZada.Model.CPU();
+				 _cpu.Id = rs.getInt("Id");
+				 _cpu.Name = rs.getString("Name");
+				 _cpu.Image = rs.getString("Image");
+				 _cpu.WarrantyPeriod = rs.getInt("WarrantyPeriod");
+				 _cpu.TradeMark = rs.getString("TradeMark");
+				 _cpu.CPUType = rs.getString("CPUType");
+				 _cpu.CPULine = rs.getString("CPULine");
+				 _cpu.CoreNum = rs.getInt("CoreNum");
+				 _cpu.ThreadNum = rs.getInt("ThreadNum");
+				 _cpu.CoreCPU = rs.getString("CoreCPU");
+				 _cpu.BasicPulse = rs.getString("BasicPulse");
+				 _cpu.MaxPulse = rs.getString("MaxPulse");
+				 _cpu.CacheCPU = rs.getString("CacheCPU");
+				 _cpu.Size = rs.getString("Size");
+				 _cpu.Description = rs.getString("Description");
+				 _cpu.IsDeleted = rs.getBoolean("IsDeleted");
+				 _cpu.Price = rs.getString("Price");
+				 _cpu.Quantity = rs.getInt("Quantity");
+				 
+				 cpulist.add(_cpu);
+		     }
+			
+			connection.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cpulist;
+	}
 }

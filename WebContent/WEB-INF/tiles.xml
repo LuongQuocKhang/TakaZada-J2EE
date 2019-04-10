@@ -22,15 +22,66 @@
        <put-attribute name="body" value="/WEB-INF/View/Index.jsp" />  
    </definition>  
    
+     <!-- Cart Page -->
+   <definition name="ShoppingCart" extends="base.definition">
+       <put-attribute name="title" value="Shopping cart" />  
+       <put-attribute name="body" value="/WEB-INF/View/Cart/ShoppingCart.jsp" />  
+   </definition> 
+   
    <!-- List computer -->
    <definition name="ListComputer" extends="base.definition">
        <put-attribute name="title" value="Computer list" />  
        <put-attribute name="body" value="/WEB-INF/View/Computer/ListComputer.jsp" />  
    </definition>  
+   <!-- computer detail -->
+   <definition name="ComputerDetail" extends="base.definition">
+       <put-attribute name="title" value="Computer Detail" />  
+       <put-attribute name="body" value="/WEB-INF/View/Computer/ComputerDetail.jsp" />  
+   </definition>  
+   
    
    <!-- List case -->
    <definition name="ListCase" extends="base.definition">
-       <put-attribute name="title" value="case list" />  
+       <put-attribute name="title" value="Case list" />  
        <put-attribute name="body" value="/WEB-INF/View/Case/ListCase.jsp" />  
    </definition> 
+    <!-- case detail -->
+   <definition name="CaseDetail" extends="base.definition">
+       <put-attribute name="title" value="Case Detail" />  
+       <put-attribute name="body" value="/WEB-INF/View/Case/CaseDetail.jsp" />  
+   </definition> 
+   
+   <!-- List cpu -->
+   <definition name="ListCPU" extends="base.definition">
+       <put-attribute name="title" value="CPU list" />  
+       <put-attribute name="body" value="/WEB-INF/View/CPU/ListCPU.jsp" />  
+   </definition> 
+    <!-- case detail -->
+   <definition name="CPUDetail" extends="base.definition">
+       <put-attribute name="title" value="CPU Detail" />  
+       <put-attribute name="body" value="/WEB-INF/View/CPU/CPUDetail.jsp" />  
+   </definition> 
+   
+     <!-- List ram -->
+   <definition name="ListRAM" extends="base.definition">
+       <put-attribute name="title" value="RAM list" />  
+       <put-attribute name="body" value="/WEB-INF/View/RAM/ListRAM.jsp" />  
+   </definition> 
+    <!-- ram detail -->
+   <definition name="RAMDetail" extends="base.definition">
+       <put-attribute name="title" value="RAM Detail" />  
+       <put-attribute name="body" value="/WEB-INF/View/RAM/RAMDetail.jsp" />  
+   </definition> 
+   
+     <!-- List vga -->
+   <definition name="ListVGA" extends="base.definition">
+       <put-attribute name="title" value="VGA list" />  
+       <put-attribute name="body" value="/WEB-INF/View/VGA/ListVGA.jsp" />  
+   </definition> 
+    <!-- vga detail -->
+   <definition name="VGADetail" extends="base.definition">
+       <put-attribute name="title" value="VGA Detail" />  
+       <put-attribute name="body" value="/WEB-INF/View/VGA/VGADetail.jsp" />  
+   </definition> 
+   
 </tiles-definitions>

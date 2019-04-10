@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="TakaZada.Model.UserLogin"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
      aria-hidden="true">
@@ -7,19 +9,30 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-                <!-- @if (user != null)
+                <% 
+                UserLogin user = (UserLogin)request.getSession().getAttribute("USER_SESSION");
+                if (user != null)
                 {
-                    <h4 class="modal-title" id="myModalLabel">
-                        Hello, @user.Name !
-                    </h4>
+                    out.print("<h4 class=\"modal-title\" id=\"myModalLabel\">");
+                        out.print("Hello," + user.Name + " !");
+                    out.print("</h4>");
+                    
+                    out.print("<form method=\"get\" action=\"\">");
+                    	out.print("<div class=\"sign-up\">");
+                        	out.print("<button class=\"btn btn-default form-control\">Kiểm tra đơn hàng</button>");
+                        	out.print("<button class=\"btn btn-default form-control\">Log out</button>");
+                    out.print("</div>");
+                out.print("</form>");
                 }
                 else
                 {
+                 	out.print("<h4 class=\"modal-title\" id=\"myModalLabel\">");
+                 	out.print("Don't Wait, Login now!");
+                 	out.print("</h4>");
+                } %>
+                 
+                        
                    
-                } -->
-                 <h4 class="modal-title" id="myModalLabel">
-                        Don't Wait, Login now!
-                    </h4>
             </div>
              <div class="modal-body modal-body-sub">
                     <div class="row">
@@ -33,7 +46,7 @@
                                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                                         <div class="facts">
                                             <div class="register">
-                                                <form method="post" action="">
+                                                <form method="post" action="/TakaZada/Login">
                                                     <input name="Email" placeholder="Email Address" id="Email" type="text" required="">
                                                     <input name="Password" placeholder="Password" id="Password" type="password" required="">
                                                     <div class="sign-up">
@@ -47,7 +60,7 @@
                                     <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
                                         <div class="facts">
                                             <div class="register">
-                                                <form action="" method="post">
+                                                <form action="/TakaZada/Register" method="post">
                                                     <div class="form-group">
                                                         <input placeholder="First Name" name="FirstName" id="FirstName" type="text" required="">
                                                     </div>

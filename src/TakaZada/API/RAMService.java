@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import TakaZada.Handle.SQLServerConnUtils_JTDS;
+import TakaZada.Interface.IRAMLoad;
+import TakaZada.Interface.IRAMRepository;
 import TakaZada.Model.RAM;
 
 public class RAMService implements IRAMLoad, IRAMRepository {
@@ -22,7 +24,7 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection
-					.prepareStatement("insert into RAM values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
+					.prepareStatement("insert into [dbo].[RAM] values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
 							+ " , ? , ? , ? , ? )");
 			statement.setInt(1, RAM.Id);
 			statement.setString(2, RAM.Name);
@@ -49,7 +51,7 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 	public boolean DeleteRAM(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update ram set IsDeleted = true where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[RAM] set IsDeleted = true where Id = ?");
 			statement.setString(1, Integer.toString(Id));
 			statement.executeUpdate();
 			connection.close();
@@ -66,7 +68,7 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 	public boolean DeleteRAMFromDeletedlist(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("delete from ram where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("delete from [dbo].[RAM] where Id = ?");
 			statement.setString(1, Integer.toString(Id));
 			statement.executeUpdate();
 			connection.close();
@@ -83,7 +85,7 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 	public boolean RestoreRAM(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update ram set IsDelete = false where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[RAM] set IsDelete = false where Id = ?");
 			statement.setString(1,Integer.toString(Id));		      
 			statement.executeUpdate ();
 			connection.close();
@@ -101,7 +103,7 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection
-					.prepareStatement("update RAM set Name = ? , Image = ? , Description = ? , TradeMark = ? , Color = ? ,"
+					.prepareStatement("update [dbo].[RAM] set Name = ? , Image = ? , Description = ? , TradeMark = ? , Color = ? ,"
 							+ " RamType = ? , Memory = ? , BusSpeed = ? , WarrantyPeriod = ?"
 							+ " , IsDeleted = ? , Price = ? , Quantity = ? where Id = ?");
 
@@ -132,7 +134,7 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			Statement statement = connection.createStatement();
-		    String sql = "select * from dbo.[RAM]";
+		    String sql = "select * from [dbo].[RAM]";
 		      
 			ResultSet rs = statement.executeQuery(sql);
 
@@ -170,7 +172,7 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 		ArrayList<TakaZada.Model.RAM> ramlist = new ArrayList<TakaZada.Model.RAM>();
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("select * from vga where Trademark = ?");
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[RAM] where Trademark = ?");
 			statement.setString(1,Trademark);	
 		      
 			ResultSet rs = statement.executeQuery();
@@ -203,13 +205,51 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 		}
 		return ramlist;
 	}
+	@Override
+	public ArrayList<RAM> LoadTheSameTrademark(String Trademark , int Id) {
+		ArrayList<TakaZada.Model.RAM> ramlist = new ArrayList<TakaZada.Model.RAM>();
+		try {
+			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[RAM] where Trademark = ? and Id != ?");
+			statement.setString(1,Trademark);	
+			statement.setInt(2,Id);
+			
+			ResultSet rs = statement.executeQuery();
 
+			 while (rs.next()) 
+			 {
+				 TakaZada.Model.RAM _ram = new TakaZada.Model.RAM();
+				 _ram.Id = rs.getInt("Id");
+				 _ram.Name = rs.getString("Name");
+				 _ram.Image = rs.getString("Image");
+				 _ram.WarrantyPeriod = rs.getInt("WarrantyPeriod");
+				 _ram.TradeMark = rs.getString("TradeMark");
+				 _ram.Description = rs.getString("Description");
+				 _ram.Color = rs.getString("Color");
+				 _ram.RamType = rs.getString("RamType");
+				 _ram.Memory = rs.getString("Memory");
+				 _ram.BusSpeed = rs.getString("BusSpeed");
+				 _ram.IsDeleted = rs.getBoolean("IsDeleted");
+				 _ram.Price = rs.getString("Price");
+				 _ram.Quantity = rs.getInt("Quantity");
+				 
+				 ramlist.add(_ram);
+		     }
+			
+			connection.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ramlist;
+	}
 	@Override
 	public RAM LoadById(int Id) {
 		ArrayList<TakaZada.Model.RAM> ramlist = new ArrayList<TakaZada.Model.RAM>();
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("select * from vga where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[RAM] where Id = ?");
 			statement.setString(1,Integer.toString(Id));	
 		      
 			ResultSet rs = statement.executeQuery();

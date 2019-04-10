@@ -1,8 +1,17 @@
+<%@page import="TakaZada.Model.UserLogin"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="header">
         <div class="container">
             <div class="w3l_login" >
-                <a href="#" style="" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                <a href="#" style="
+                <% 
+                	UserLogin user = (UserLogin)request.getSession().getAttribute("USER_SESSION");
+                	if ( user != null )
+                	{
+                		out.print("background-color:#ff9b05");
+                	}
+                %>
+                " data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
             </div>
             <div class="w3l_logo">
                 <h1><a href="/TakaZada">TakaZada</a></h1>
@@ -30,7 +39,7 @@
                 </div>
             </div>
             <div class="cart box_1">
-                <a href="">
+                <a href="/TakaZada/ShoppingCart">
                     <div class="total">
                         <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
                     </div>

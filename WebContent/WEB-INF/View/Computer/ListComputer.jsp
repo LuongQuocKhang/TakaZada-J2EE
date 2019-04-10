@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%@ page import="java.util.ArrayList,java.util.Iterator,TakaZada.Model.*" %>
+<%@ page import="java.util.ArrayList,TakaZada.Model.*" %>
 <div class="container">
 	<!-- breadcrumbs -->
 <div class="breadcrumb_dress">
@@ -31,14 +31,14 @@
                                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body panel_text">
                                         <ul>
-                                            <li><a href="">Apple</a></li>
-                                            <li><a href="">Acer</a></li>
-                                            <li><a href="">Asus</a></li>
-                                            <li><a href="">Dell</a></li>
-                                            <li><a href="">HP</a></li>
-                                            <li><a href="">Lenovo</a></li>
-                                            <li><a href="">LG</a></li>
-                                            <li><a href="">Tất cả</a></li>
+                                            <li><a href="/TakaZada/ListComputer/Apple">Apple</a></li>
+                                            <li><a href="/TakaZada/ListComputer/Acer">Acer</a></li>
+                                            <li><a href="/TakaZada/ListComputer/Asus">Asus</a></li>
+                                            <li><a href="/TakaZada/ListComputer/Dell">Dell</a></li>
+                                            <li><a href="/TakaZada/ListComputer/HP">HP</a></li>
+                                            <li><a href="/TakaZada/ListComputer/Lenovo">Lenovo</a></li>
+                                            <li><a href="/TakaZada/ListComputer/LG">LG</a></li>
+                                            <li><a href="/TakaZada/ListComputer">Tất cả</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                 				out.print("<div class=\"col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses\">");
                 					out.print("<div class=\"agile_ecommerce_tab_left dresses_grid\">");
                 						out.print(" <img src=" + request.getAttribute("domainname") + "/Resources/Content/Pictures/Computer/" + listcomputer.get(i-1).Image.replace(" ", "%20") + " \"" + "alt=\"\" class=\"img-responsive\" style=\" width: 200px;height: 170px;\" />");
-                						out.print("<h5><a href=\"\">" + listcomputer.get(i-1).Name + "</a></h5>");
+                						out.print("<h5><a href=\"" + request.getAttribute("domainname") + "/ComputerDetail/" + listcomputer.get(i-1).Id + "\">" + listcomputer.get(i-1).Name + "</a></h5>");
                 						out.print("<div class=\"simpleCart_shelfItem\">");
                 							out.print("<i class=\"item_price\">" + listcomputer.get(i-1).Price + "</i></p>");
                 							out.print("<p><a class=\"item_add\" href=\"\">Add to cart</a></p>");

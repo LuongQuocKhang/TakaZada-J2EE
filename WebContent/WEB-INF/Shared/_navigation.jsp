@@ -13,7 +13,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="" class="act">Home</a></li>
+                        <li class="active"><a href="/" class="act">Trang chủ</a></li>
                         <!-- Mega Menu -->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Linh kiện <b class="caret"></b></a>
@@ -22,42 +22,42 @@
                                     <div class="col-sm-3">
                                         <ul class="multi-column-dropdown">
                                             <h6>CPU - bộ vi xử lý</h6>
-                                            <li><a href="">Core i3</a></li>
-                                            <li><a href="">Core i5</a></li>
-                                            <li><a href="">Core i7</a></li>
-                                            <li><a href="">Ryzen</a></li>
-                                            <li><a href="">Tất cả</a></li>
+                                            <li><a href="/TakaZada/ListCPU/Core i3">Core i3</a></li>
+                                            <li><a href="/TakaZada/ListCPU/Core i5">Core i5</a></li>
+                                            <li><a href="/TakaZada/ListCPU/Core i7">Core i7</a></li>
+                                            <li><a href="/TakaZada/ListCPU/Ryzen">Ryzen</a></li>
+                                            <li><a href="/TakaZada/ListCPU">Tất cả</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-2">
                                         <ul class="multi-column-dropdown">
                                             <h6>RAM</h6>
-                                            <li><a href=")">ADATA<span>Mới</span></a></li>
-                                            <li><a href="">Kingmax</a></li>
-                                            <li><a href="">G.Skill </a></li>
-                                            <li><a href="">Kingston</a></li>
-                                            <li><a href="">APACER</a></li>
-                                            <li><a href="">Tất cả</a></li>
+                                            <li><a href="/TakaZada/ListRAM/ADATA">ADATA<span>Mới</span></a></li>
+                                            <li><a href="/TakaZada/ListRAM/Kingmax">Kingmax</a></li>
+                                            <li><a href="/TakaZada/ListRAM/GSkill">G.Skill </a></li>
+                                            <li><a href="/TakaZada/ListRAM/Kingston">Kingston</a></li>
+                                            <li><a href="/TakaZada/ListRAM/APACER">APACER</a></li>
+                                            <li><a href="/TakaZada/ListRAM">Tất cả</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-2">
                                         <ul class="multi-column-dropdown">
                                             <h6>VGA</h6>
-                                            <li><a href="">GIGABYTE<span>Mới</span></a></li>
-                                            <li><a href="">Asus</a></li>
-                                            <li><a href="">MSI</a></li>
-                                            <li><a href="">Galax</a></li>
-                                            <li><a href="">Tất cả</a></li>
+                                            <li><a href="/TakaZada/ListVGA/GIGABYTE">GIGABYTE<span>Mới</span></a></li>
+                                            <li><a href="/TakaZada/ListVGA/Asus">Asus</a></li>
+                                            <li><a href="/TakaZada/ListVGA/MSI">MSI</a></li>
+                                            <li><a href="/TakaZada/ListVGA/Galax">Galax</a></li>
+                                            <li><a href="/TakaZada/ListVGA">Tất cả</a></li>
 
                                         </ul>
                                     </div>
                                     <div class="col-sm-2">
                                         <ul class="multi-column-dropdown">
                                             <h6>Case</h6>
-                                            <li><a href="">Corsair</a></li>
-                                            <li><a href="">Cooler Master</a></li>
-                                            <li><a href="">Golden Field</a></li>
-                                            <li><a href="">Sahara</a></li>
+                                            <li><a href="/TakaZada/ListCase/Corsair">Corsair</a></li>
+                                            <li><a href="/TakaZada/ListCase/Cooler Master">Cooler Master</a></li>
+                                            <li><a href="/TakaZada/ListCase/Golden Field">Golden Field</a></li>
+                                            <li><a href="/TakaZada/ListCase/Corsair">Sahara</a></li>
                                             <li><a href="/TakaZada/ListCase">Tất cả</a></li>
                                         </ul>
                                     </div><div class="col-sm-2">

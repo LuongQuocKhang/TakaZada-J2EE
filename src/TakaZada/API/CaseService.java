@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import TakaZada.Handle.SQLServerConnUtils_JTDS;
+import TakaZada.Interface.ICaseReponsitory;
+import TakaZada.Interface.ILoadCase;
 import TakaZada.Model.Case;
 
 public class CaseService implements ILoadCase, ICaseReponsitory {
@@ -23,7 +25,7 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 		try
 		{
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("insert into case values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
+			PreparedStatement statement = connection.prepareStatement("insert into [dbo].[Case] values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
 					+ " , ? , ? , ? , ? , ? , ? , ? , ?)");
 			statement.setInt(1, Case.Id);
 			statement.setString(2, Case.Name);
@@ -53,7 +55,7 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 	public boolean DeleteCase(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update case set IsDelete = true where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[Case] set IsDelete = true where Id = ?");
 			statement.setString(1,Integer.toString(Id));		      
 			statement.executeUpdate ();
 			connection.close();
@@ -70,7 +72,7 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 	public boolean DeleteCaseFromDeletedlist(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("delete from case where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("delete from [dbo].[Case] where Id = ?");
 			statement.setString(1,Integer.toString(Id));	      
 			statement.executeUpdate ();
 			connection.close();
@@ -87,7 +89,7 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 	public boolean RestoreCase(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update case set IsDelete = false where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[Case] set IsDelete = false where Id = ?");
 			statement.setString(1,Integer.toString(Id));		      
 			statement.executeUpdate ();
 			connection.close();
@@ -105,7 +107,7 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 		try
 		{
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update case set Name = ? , Image = ? , Description = ? , WarrantyPeriod = ? , TradeMark = ? "
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[Case] set Name = ? , Image = ? , Description = ? , WarrantyPeriod = ? , TradeMark = ? "
 					+ ", Model = ? , Color = ? , Size = ? , MainSupport = ?"
 					+ " , USB = ? , DriverBays = ? , Slots = ? , IsDelete = ? , Price = ? , Quantity = ? where Id = ? ");
 			
@@ -181,7 +183,7 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 		ArrayList<TakaZada.Model.Case> caselist = new ArrayList<TakaZada.Model.Case>();
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("select * from case where Trademark = ?");
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[Case] where Trademark = ?");
 			statement.setString(1,Trademark);	
 		    
 			ResultSet rs = statement.executeQuery();
@@ -217,13 +219,54 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 		}
 		return caselist;
 	}
+	@Override
+	public ArrayList<Case> LoadTheSameTrademark(String Trademark,int Id) {
+		ArrayList<TakaZada.Model.Case> caselist = new ArrayList<TakaZada.Model.Case>();
+		try {
+			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[Case] where Trademark = ? and Id != ?");
+			statement.setString(1,Trademark);	
+			statement.setInt(2,Id);	
+			
+			ResultSet rs = statement.executeQuery();
 
+			 while (rs.next()) 
+			 {
+				 TakaZada.Model.Case _case = new TakaZada.Model.Case();
+				 _case.Id = rs.getInt("Id");
+				 _case.Name = rs.getString("Name");
+				 _case.Image = rs.getString("Image");
+				 _case.Description = rs.getString("Description");
+				 _case.WarrantyPeriod = rs.getInt("WarrantyPeriod");
+				 _case.TradeMark = rs.getString("TradeMark");
+				 _case.Model = rs.getString("Model");
+				 _case.Color = rs.getString("Color");
+				 _case.Size = rs.getString("Size");
+				 _case.MainSupport = rs.getString("MainSupport");
+				 _case.USB = rs.getString("USB");
+				 _case.DriverBays = rs.getString("DriverBays");
+				 _case.Slots = rs.getString("Slots");
+				 _case.IsDelete = rs.getBoolean("IsDelete");
+				 _case.Price = rs.getString("Price");
+				 _case.Quantity = rs.getInt("Quantity");
+				 
+				 caselist.add(_case);
+		     }
+			
+			connection.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return caselist;
+	}
 	@Override
 	public Case LoadById(int Id) {
 		ArrayList<TakaZada.Model.Case> caselist = new ArrayList<TakaZada.Model.Case>();
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("select * from case where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[Case] where Id = ?");
 			statement.setString(1,Integer.toString(Id));	
 		    
 			ResultSet rs = statement.executeQuery();

@@ -31,14 +31,12 @@
                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body panel_text">
                                         <ul>
-                                            <li><a href="">Corsair</a></li>
-                                            <li><a href="">Cooler Master</a></li>
-                                            <li><a href="">Golden Field</a></li>
-                                            <li><a href="">Erosi</a></li>
-                                            <li><a href="">Sahara</a></li>
-                                            <li><a href="">Corsair</a></li>
-                                            <li><a href="">Delux</a></li>
-                                            <li><a href="">Tất cả</a></li>
+                                            <li><a href="/TakaZada/ListCase/Corsair">Corsair</a></li>
+                                            <li><a href="/TakaZada/ListCase/Cooler Master">Cooler Master</a></li>
+                                            <li><a href="/TakaZada/ListCase/Golden Field">Golden Field</a></li>
+                                            <li><a href="/TakaZada/ListCase/Erosi">Erosi</a></li>
+                                            <li><a href="/TakaZada/ListCase/Sahara">Sahara</a></li>
+                                            <li><a href="/TakaZada/ListCase">Tất cả</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -78,7 +76,7 @@
                 				out.print("<div class=\"col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses\">");
                 					out.print("<div class=\"agile_ecommerce_tab_left dresses_grid\">");
                 						out.print(" <img src=" + request.getAttribute("domainname") + "/Resources/Content/Pictures/Case/" + listcase.get(i-1).Image.replace(" ", "%20") + " \"" + "alt=\"\" class=\"img-responsive\" style=\" width: 200px;height: 170px;\" />");
-                						out.print("<h5><a href=\"\">" + listcase.get(i-1).Name + "</a></h5>");
+                						out.print("<h5><a href=\"" + request.getAttribute("domainname") + "/CaseDetail/" + listcase.get(i-1).Id + "\">" + listcase.get(i-1).Name + "</a></h5>");              						
                 						out.print("<div class=\"simpleCart_shelfItem\">");
                 							out.print("<i class=\"item_price\">" + listcase.get(i-1).Price + "</i></p>");
                 							out.print("<p><a class=\"item_add\" href=\"\">Add to cart</a></p>");
@@ -90,7 +88,6 @@
                 			out.print("</div>");
                 			out.print("<div class=\"clearfix\"> </div>");
                 		}
-
                 	}
                 %>
             </div>

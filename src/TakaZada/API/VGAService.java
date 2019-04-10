@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import TakaZada.Handle.SQLServerConnUtils_JTDS;
+import TakaZada.Interface.IVGALoad;
+import TakaZada.Interface.IVGAReponsitory;
 import TakaZada.Model.VGA;
 
 public class VGAService implements IVGALoad, IVGAReponsitory {
@@ -22,7 +24,7 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection
-					.prepareStatement("insert into VGA values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
+					.prepareStatement("insert into [dbo].[VGA] values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
 							+ " , ? , ? , ? , ? , ? , ? , ? , ? , ?)");
 			statement.setInt(1, VGA.Id);
 			statement.setString(2, VGA.Name);
@@ -55,7 +57,7 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 	public boolean DeleteVGA(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update vga set IsDeleted = true where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[VGA] set IsDeleted = true where Id = ?");
 			statement.setString(1, Integer.toString(Id));
 			statement.executeUpdate();
 			connection.close();
@@ -72,7 +74,7 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 	public boolean DeleteVGAFromDeletedlist(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("delete from vga where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("delete from [dbo].[VGA] where Id = ?");
 			statement.setString(1, Integer.toString(Id));
 			statement.executeUpdate();
 			connection.close();
@@ -89,7 +91,7 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 	public boolean RestoreVGA(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update vga set IsDelete = false where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[VGA] set IsDelete = false where Id = ?");
 			statement.setString(1,Integer.toString(Id));		      
 			statement.executeUpdate ();
 			connection.close();
@@ -107,7 +109,7 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection
-					.prepareStatement("update VGA set ? , ? , ? , ? , ? , ? , ? , ? , ?"
+					.prepareStatement("update [dbo].[VGA] set ? , ? , ? , ? , ? , ? , ? , ? , ?"
 							+ " , ? , ? , ? , ? , ? , ? , ? , ? where Id = ?");		
 			statement.setString(1, VGA.Name);
 			statement.setString(2, VGA.Image);
@@ -186,9 +188,8 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 		ArrayList<TakaZada.Model.VGA> vgalist = new ArrayList<TakaZada.Model.VGA>();
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("select * from vga where Trademark = ?");
-			statement.setString(1,Trademark);	
-		    
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[VGA] where Trademark = ?");
+			statement.setString(1,Trademark);		
 			ResultSet rs = statement.executeQuery();
 
 			 while (rs.next()) 
@@ -202,7 +203,7 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 				 _vga.Label = rs.getString("Label");
 				 _vga.ChipsetManufacturer = rs.getString("ChipsetManufacturer");
 				 _vga.Model = rs.getString("Model");
-				 _vga.VGA1 = rs.getString("VGA1");
+				 _vga.VGA1 = rs.getString("VGA");
 				 _vga.BoostClock = rs.getString("BoostClock");
 				 _vga.VGAMemory = rs.getString("VGAMemory");
 				 _vga.RamType = rs.getString("RamType");
@@ -225,13 +226,57 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 		}
 		return vgalist;
 	}
+	@Override
+	public ArrayList<VGA> LoadTheSameTrademark(String Trademark, int Id) {
+		ArrayList<TakaZada.Model.VGA> vgalist = new ArrayList<TakaZada.Model.VGA>();
+		try {
+			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[VGA] where Trademark = ? and Id != ?");
+			statement.setString(1,Trademark);	
+			statement.setInt(2,Id);
+			
+			ResultSet rs = statement.executeQuery();
 
+			 while (rs.next()) 
+			 {
+				 TakaZada.Model.VGA _vga = new TakaZada.Model.VGA();
+				 _vga.Id = rs.getInt("Id");
+				 _vga.Name = rs.getString("Name");
+				 _vga.Image = rs.getString("Image");
+				 _vga.WarrantyPeriod = rs.getInt("WarrantyPeriod");
+				 _vga.TradeMark = rs.getString("TradeMark");
+				 _vga.Label = rs.getString("Label");
+				 _vga.ChipsetManufacturer = rs.getString("ChipsetManufacturer");
+				 _vga.Model = rs.getString("Model");
+				 _vga.VGA1 = rs.getString("VGA");
+				 _vga.BoostClock = rs.getString("BoostClock");
+				 _vga.VGAMemory = rs.getString("VGAMemory");
+				 _vga.RamType = rs.getString("RamType");
+				 _vga.MaxResolution = rs.getString("MaxResolution");
+				 _vga.Directx = rs.getString("Directx");
+				 _vga.Size = rs.getString("Size");
+				 _vga.Description = rs.getString("Description");
+				 _vga.IsDeleted = rs.getBoolean("IsDeleted");
+				 _vga.Price = rs.getString("Price");
+				 _vga.Quantity = rs.getInt("Quantity");
+				 
+				 vgalist.add(_vga);
+		     }
+			
+			connection.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return vgalist;
+	}
 	@Override
 	public VGA LoadById(int Id) {
 		ArrayList<TakaZada.Model.VGA> vgalist = new ArrayList<TakaZada.Model.VGA>();
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("select * from vga where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[VGA] where Id = ?");
 			statement.setString(1,Integer.toString(Id));	
 		    
 			ResultSet rs = statement.executeQuery();
@@ -247,7 +292,7 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 				 _vga.Label = rs.getString("Label");
 				 _vga.ChipsetManufacturer = rs.getString("ChipsetManufacturer");
 				 _vga.Model = rs.getString("Model");
-				 _vga.VGA1 = rs.getString("VGA1");
+				 _vga.VGA1 = rs.getString("VGA");
 				 _vga.BoostClock = rs.getString("BoostClock");
 				 _vga.VGAMemory = rs.getString("VGAMemory");
 				 _vga.RamType = rs.getString("RamType");

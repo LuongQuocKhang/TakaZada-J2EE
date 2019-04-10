@@ -37,14 +37,26 @@
                             {
                             	out.print("<div class=\"col-md-4 agile_ecommerce_tab_left\">");
                             		out.print("<div class=\"card\" style=\"width:215px;height: 385px;margin:10px;\">");
-	                            		out.print(" <a href=\"\">");
+	                            		out.print(" <a href=\"/TakaZada/RAMDetail/" + listram.get(i).Id + "\"" + ">\"");
 	                            			out.print("<img class=\"card-img-top itemImage\" src=" + request.getAttribute("domainname") + "/Resources/Content/Pictures/Ram/" + listram.get(i).Image.replace(" ", "%20") + " \"" + "alt=\"Card image cap\">");
 	                           			out.print(" </a>");
 	                            		out.print("<div class=\"card-body\">");
-	                            			out.print("<h5 class=\"card-title\">" + listram.get(i).Name + "</h5>");
+	                            			out.print("<h5 class=\"card-title\">");  
+	                            				out.print(" <a href=\"/TakaZada/RAMDetail/" + listram.get(i).Id + "\"" + ">");
+	                            					out.print(listram.get(i).Name);
+	                            				out.print("</a>");
+	                            			out.print("</h5>");
 	                           				out.print("<div class=\"simpleCart_shelfItem\">");
 		                           				out.print("<p> <i class=\"item_price\">" + listram.get(i).Price + "</i></p>");
-		                           				out.print("<p><a class=\"item_add\" href=\"\">Add to cart</a></p>");
+		                           				out.print("<p><a class=\"item_add\" href=\"/TakaZada/AddToCart/" 
+		                           				+  "RAM" + "/" 
+		                           				+ listram.get(i).Id + "/"
+		                           				+ "1" + "/"
+		                           				+ listram.get(i).Price + "/"
+		                           				+ listram.get(i).Id + "/"
+		                           				+ listram.get(i).Name + "/"
+		                           				+ listram.get(i).Image + "/"
+		                           				+ "\" >Add to cart</a></p>");
 	                           				out.print("</div>");
 	                           			out.print("</div>");
                            			out.print("</div>");
@@ -62,14 +74,26 @@
 	                            {
 	                            	out.print("<div class=\"col-md-4 agile_ecommerce_tab_left\">");
 	                            		out.print("<div class=\"card\" style=\"width:215px;height: 385px;margin:10px;\">");
-		                            		out.print(" <a href=\"\">");
+	                            			out.print(" <a href=\"/TakaZada/VGADetail/" + listvga.get(i).Id + "\"" + ">\"");
 		                            			out.print("<img class=\"card-img-top itemImage\" src=" + request.getAttribute("domainname") + "/Resources/Content/Pictures/VGA/" + listvga.get(i).Image.replace(" ", "%20") + " \"" + "alt=\"Card image cap\">");
 		                           			out.print(" </a>");
 		                            		out.print("<div class=\"card-body\">");
-		                            			out.print("<h5 class=\"card-title\">" + listvga.get(i).Name + "</h5>");
+			                            		out.print("<h5 class=\"card-title\">");  
+	                            					out.print(" <a href=\"/TakaZada/VGADetail/" + listvga.get(i).Id + "\"" + ">");
+	                            						out.print(listvga.get(i).Name);
+	                            					out.print("</a>");
+	                            				out.print("</h5>");
 		                           				out.print("<div class=\"simpleCart_shelfItem\">");
 			                           				out.print("<p> <i class=\"item_price\">" + listvga.get(i).Price + "</i></p>");
-			                           				out.print("<p><a class=\"item_add\" href=\"\">Add to cart</a></p>");
+			                           				out.print("<p><a class=\"item_add\" href=\"/TakaZada/AddToCart/" 
+					                           				+  "VGA" + "/" 
+					                           				+ listvga.get(i).Id + "/"
+					                           				+ "1" + "/"
+					                           				+ listvga.get(i).Price + "/"
+					                           				+ listvga.get(i).Id + "/"
+					                           				+ listvga.get(i).Name + "/"
+					                           				+ listvga.get(i).Image + "/"
+					                           				+ "\" >Add to cart</a></p>");
 		                           				out.print("</div>");
 		                           			out.print("</div>");
 	                           			out.print("</div>");
@@ -86,14 +110,26 @@
 	                            {
 	                            	out.print("<div class=\"col-md-4 agile_ecommerce_tab_left\">");
 	                            		out.print("<div class=\"card\" style=\"width:215px;height: 385px;margin:10px;\">");
-		                            		out.print(" <a href=\"\">");
+	                            			out.print(" <a href=\"/TakaZada/CPUDetail/" + listcpu.get(i).Id + "\"" + ">\"");
 		                            			out.print("<img class=\"card-img-top itemImage\" src=" + request.getAttribute("domainname") + "/Resources/Content/Pictures/CPU/" + listcpu.get(i).Image.replace(" ", "%20") + " \"" + "alt=\"Card image cap\">");
 		                           			out.print(" </a>");
 		                            		out.print("<div class=\"card-body\">");
-		                            			out.print("<h5 class=\"card-title\">" + listcpu.get(i).Name + "</h5>");
+			                            		out.print("<h5 class=\"card-title\">");  
+		                        					out.print(" <a href=\"/TakaZada/CPUDetail/" + listcpu.get(i).Id + "\"" + ">");
+		                        						out.print(listcpu.get(i).Name);
+		                        					out.print("</a>");
+		                        				out.print("</h5>");
 		                           				out.print("<div class=\"simpleCart_shelfItem\">");
 			                           				out.print("<p> <i class=\"item_price\">" + listcpu.get(i).Price + "</i></p>");
-			                           				out.print("<p><a class=\"item_add\" href=\"\">Add to cart</a></p>");
+			                           				out.print("<p><a class=\"item_add\" href=\"/TakaZada/AddToCart/" 
+					                           				+  "CPU" + "/" 
+					                           				+ listcpu.get(i).Id + "/"
+					                           				+ "1" + "/"
+					                           				+ listcpu.get(i).Price + "/"
+					                           				+ listcpu.get(i).Id + "/"
+					                           				+ listcpu.get(i).Name + "/"
+					                           				+ listcpu.get(i).Image + "/"
+					                           				+ "\" >Add to cart</a></p>");
 		                           				out.print("</div>");
 		                           			out.print("</div>");
 	                           			out.print("</div>");
@@ -110,14 +146,26 @@
 	                            {
 	                            	out.print("<div class=\"col-md-4 agile_ecommerce_tab_left\">");
 	                            		out.print("<div class=\"card\" style=\"width:215px;height: 385px;margin:10px;\">");
-		                            		out.print(" <a href=\"\">");
+		                            		out.print(" <a href=\"" + request.getAttribute("domainname") + "/CaseDetail/" + listcase.get(i).Id + "\">");
 		                            			out.print("<img class=\"card-img-top itemImage\" src=" + request.getAttribute("domainname") + "/Resources/Content/Pictures/Case/" + listcase.get(i).Image.replace(" ", "%20") + " \"" + "alt=\"Card image cap\">");
 		                           			out.print(" </a>");
 		                            		out.print("<div class=\"card-body\">");
-		                            			out.print("<h5 class=\"card-title\">" + listcase.get(i).Name + "</h5>");
+			                            		out.print("<h5 class=\"card-title\">");  
+		                        					out.print(" <a href=\"/TakaZada/CaseDetail/" + listcase.get(i).Id + "\"" + ">");
+		                        						out.print(listcase.get(i).Name);
+		                        					out.print("</a>");
+	                        					out.print("</h5>");
 		                           				out.print("<div class=\"simpleCart_shelfItem\">");
 			                           				out.print("<p> <i class=\"item_price\">" + listcase.get(i).Price + "</i></p>");
-			                           				out.print("<p><a class=\"item_add\" href=\"\">Add to cart</a></p>");
+			                           				out.print("<p><a class=\"item_add\" href=\"/TakaZada/AddToCart/" 
+					                           				+  "Case" + "/" 
+					                           				+ listcase.get(i).Id + "/"
+					                           				+ "1" + "/"
+					                           				+ listcase.get(i).Price + "/"
+					                           				+ listcase.get(i).Id + "/"
+					                           				+ listcase.get(i).Name + "/"
+					                           				+ listcase.get(i).Image + "/"
+					                           				+ "\" >Add to cart</a></p>");
 		                           				out.print("</div>");
 		                           			out.print("</div>");
 	                           			out.print("</div>");
@@ -248,14 +296,26 @@
 	                   		out.print("<div class=\"item\" style=\"margin: 20px;\">");
 	                   			out.print("<div class=\"col-md-4 agile_ecommerce_tab_left\" style=\"width:255px;height: 340px;background-color: transparent;\">");
 	               	 				out.print("<div class=\"card\" style=\"width: 215px;\">");
-	               	 					out.print("<a href=\"\">");
+	               	 					out.print("<a href=\"" + request.getAttribute("domainname") + "/ComputerDetail/" + listcomputer.get(i).Id + "\">");
 	               	 						out.print(" <img class=\"card-img-top itemImage\" src=" + request.getAttribute("domainname") + "/Resources/Content/Pictures/Computer/" + listcomputer.get(i).Image.replace(" ", "%20") + " \"" + "alt=\"Card image cap\">");
 	                   					out.print("</a>");
-	                   					out.print(" <div class=\"card-body\">");
-	                   						out.print("<h5 class=\"card-title\">" + listcomputer.get(i).Name + "</h5>");
+	                   					out.print("<div class=\"card-body\">");
+		                   					out.print("<h5 class=\"card-title\">");  
+	                    						out.print(" <a href=\"/TakaZada/ComputerDetail/" + listcomputer.get(i).Id + "\"" + ">");
+	                    							out.print(listcomputer.get(i).Name);
+	                    						out.print("</a>");
+	                						out.print("</h5>");
 	                   						out.print("<div class=\"simpleCart_shelfItem\">");
 	                   							out.print("<p> <i class=\"item_price\">" + listcomputer.get(i).Price + "</i></p>");
-	                   							out.print("<p><a class=\"item_add\" href=\"\">Add to cart</a></p>");
+	                   							out.print("<p><a class=\"item_add\" href=\"/TakaZada/AddToCart/" 
+				                           				+  "Computer" + "/" 
+				                           				+ listcomputer.get(i).Id + "/"
+				                           				+ "1" + "/"
+				                           				+ listcomputer.get(i).Price + "/"
+				                           				+ listcomputer.get(i).Id + "/"
+				                           				+ listcomputer.get(i).Name + "/"
+				                           				+ listcomputer.get(i).Image + "/"
+				                           				+ "\" >Add to cart</a></p>");
 	                   						out.print("</div>");
 	                   					out.print("</div>");
 	                   				out.print("</div>");
