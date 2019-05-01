@@ -24,26 +24,12 @@
 <div class="single">
     
     <div class="container">
-        <h3 class='success-mesage font-green-sharp' style='display: none;font-size: 20px;color: #000000!important;font-weight: bold;'>
+       	<h3 class='success-mesage font-green-sharp' style='display: none;font-size: 20px;color: #00db00!important;font-weight: bold;'>
             Cập nhật giỏ hàng thành công
         </h3>
-        <h3 class='error-mesage font-green-sharp' style='display: none;font-size: 20px;color: #000000!important;font-weight: bold;'>
+        <h3 class='error-mesage font-green-sharp' style='display: none;font-size: 20px;color: #f44141!important;font-weight: bold;'>
             Lỗi xảy ra khi cập nhật giỏ hàng !!
-        </h3>
-        <!-- @{
-            if (null != Session["submit_message"])
-            {
-                @Html.Raw("<h3 class='error-mesage' style='display: none;'>" + Session["submit_message"] + "</h3>");
-                <script type="text/javascript">
-                    $(function () {
-                        $('.error-mesage').delay(500).fadeIn('normal', function () {
-                            $(this).delay(2500).fadeOut();
-                        });
-                    });
-                </script>
-                Session["submit_message"] = null;
-            }
-        } -->
+        </h3> 
         <div class="col-md-4 single-left">
             <div class="flexslider">
                 <ul class="slides">
@@ -161,8 +147,8 @@
                         <% out.print(_case.Description); %>
                     </p>
                 </div>
-                <input type="hidden" name="Name" id="Name" value="@SelectedCase.Name" />
-                <input type="hidden" name="Image" id="Image" value="@SelectedCase.Image" />
+                <input type="hidden" name="Name" id="Name" value="<% out.print(_case.Name); %>" />
+                <input type="hidden" name="Image" id="Image" value="<% out.print(_case.Image); %>" />
                 <div class="tab-2 resp-tab-content additional_info_grid" aria-labelledby="tab_item-1">
                     <h4>Chi tiết sản phẩm</h4>
                     <% out.print("<h3>" + _case.Name + "</h3>"); %>
@@ -328,28 +314,28 @@
     </div>
 </div>
 <script charset="utf-8">
-    $("#btnBuy").on('click', function () {
-        $.ajax(
-            {
-                url: "",
-                method: "POST",
-                /* data: { }, */
-                    success: function (response) {
-                        if (response != null && response.result == true) {
-                            $(function () {
-                                $('.success-mesage').delay(500).fadeIn('normal', function () {
-                                    $(this).delay(2500).fadeOut();
-                                });
-                            });
-                        }
-                        else {
-                            $(function () {
-                                $('.error-mesage').delay(500).fadeIn('normal', function () {
-                                    $(this).delay(2500).fadeOut();
-                                });
-                            });
-                        }
-                    }
-                })
-        });
+$("#btnBuy").on('click', function () {
+    $.ajax(
+        {
+            url: "<% out.print(request.getAttribute("domainname")); %>" + "/AddToCart/",
+            method: "POST",
+            data: { "type": "Case", "ItemId": "<% out.print(_case.Id); %>", "Quantity": $(".value1").text(), "price": "<% out.print(_case.Price); %>", "Id": "<% out.print(_case.Id); %>", "Name": $("#Name").val(), "Image": $("#Image").val() },
+            success: function (response) {
+                if (response == true) {
+                    $(function () {
+                        $('.success-mesage').delay(500).fadeIn('normal', function () {
+                            $(this).delay(2500).fadeOut();
+                        });
+                    });
+                }
+                else {
+                    $(function () {
+                        $('.error-mesage').delay(500).fadeIn('normal', function () {
+                            $(this).delay(2500).fadeOut();
+                        });
+                    });
+                }
+            }
+        })
+});
 </script>

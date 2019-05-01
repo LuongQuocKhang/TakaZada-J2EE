@@ -13,21 +13,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import TakaZada.API.AdminService;
 import TakaZada.API.CartService;
+import TakaZada.API.ReceiptService;
 import TakaZada.Interface.ICartRepository;
 import TakaZada.Interface.IUser;
 import TakaZada.Model.Cart;
 import TakaZada.Model.CartDetails;
+import TakaZada.Model.Receipt;
+import TakaZada.Model.UserAccount;
 import TakaZada.Model.UserLogin;
 
 @Controller
 public class CartController {
 	 private AdminService _UserService;
      private CartService _CartService;
-     
+     private ReceiptService _ReceiptService;
      public CartController()
      {
     	 _UserService = new AdminService();
          _CartService = new CartService();
+         _ReceiptService = new ReceiptService();
      }
     @RequestMapping(value = {"/ShoppingCart"}, method = RequestMethod.GET)
  	public String CartPage(@Autowired HttpServletRequest request)
@@ -36,6 +40,7 @@ public class CartController {
         if (User != null)
         {
             Cart cart = _CartService.LoadCartByEmail(User.UserName);
+            request.setAttribute("domainname", request.getContextPath());
             request.setAttribute("Cart", cart);
             request.setAttribute("CartDetails", _CartService.LoadCartDetails(cart.CartId));
             return "ShoppingCart";
@@ -57,6 +62,7 @@ public class CartController {
         }
         return "redirect:/";
     }
+    
     @RequestMapping(value = {"/AddToCart/"}, method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public String AddtoCart(@Autowired HttpServletRequest request)
@@ -79,4 +85,63 @@ public class CartController {
     	}
     	return "false";
     }
+    @RequestMapping(value = {"/RemoveCartDetails/"}, method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public String RemoveCartDetails(@Autowired HttpServletRequest request)
+    {
+    	int CartDetailId = Integer.parseInt(request.getParameter("CartDetailId"));
+        try
+        {
+            if ( _CartService.RemoveCartDetail(CartDetailId) == true )
+            {
+            	return "true";
+            }
+            
+        }
+        catch (Exception e) { }
+        return "false";
+    }
+    @RequestMapping(value = {"/DescreaseQuantity/"}, method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public String DescreaseQuantity(@Autowired HttpServletRequest request)
+    {
+    	int CartDetailId = Integer.parseInt(request.getParameter("CartDetailId"));
+        if ( _CartService.DecreaseQuantity(CartDetailId))
+        {
+            return "true";
+        }
+        return "false";
+    }
+    @RequestMapping(value = {"/IncreaseQuantity/"}, method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public String IncreaseQuantity(@Autowired HttpServletRequest request)
+    {
+    	int CartDetailId = Integer.parseInt(request.getParameter("CartDetailId"));
+        if (_CartService.IncreaseQuantity(CartDetailId))
+        {
+            return "true";
+        }
+        return "false";
+    }
+    @RequestMapping(value = {"/Purchase/"}, method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public String Purchase(@Autowired HttpServletRequest request)
+    {
+        try
+        {
+        	UserAccount UserInfo = _UserService.GetUserInfo((((UserLogin)request.getSession().getAttribute("USER_SESSION")).UserName));
+            String Total = request.getParameter("Total");
+            Receipt receipt = _ReceiptService.CreateReceipt(UserInfo.Email, UserInfo.FirstName + UserInfo.LastName, UserInfo.PhoneNumber, 15000, Double.parseDouble(Total));
+            _ReceiptService.AddReceipt(receipt);
+
+            ArrayList<CartDetails> cartdetail = _CartService.LoadCartDetails(_CartService.LoadCartByEmail(UserInfo.Email).CartId);
+            for (int i = 0; i < cartdetail.size() ; i++) {
+            	_ReceiptService.AddDetail(cartdetail.get(i), UserInfo);
+			}
+            return "true";
+        }
+        catch (Exception e) { }
+        return "false";
+    }
+    
 }

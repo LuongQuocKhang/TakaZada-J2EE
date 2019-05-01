@@ -47,9 +47,9 @@ public class AdminService implements IUser , ILog{
 
 	@Override
 	public boolean AdminLogIn(String username, String password) {
-		 if (username.length() == 0)
+		 if (username.length() > 0)
          {
-             if (username == "admin" && password == "123")
+             if (username.equals("admin") && password.equals("123"))
              {
                  return true;
              }

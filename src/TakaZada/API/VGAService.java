@@ -25,29 +25,29 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection
 					.prepareStatement("insert into [dbo].[VGA] values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
-							+ " , ? , ? , ? , ? , ? , ? , ? , ? , ?)");
-			statement.setInt(1, VGA.Id);
-			statement.setString(2, VGA.Name);
-			statement.setString(3, VGA.Image);
-			statement.setString(4, VGA.TradeMark);
-			statement.setString(5, VGA.Label);
-			statement.setString(6, VGA.ChipsetManufacturer);
-			statement.setString(7, VGA.Model);
-			statement.setString(8, VGA.VGA1);
-			statement.setString(9, VGA.BoostClock);
-			statement.setString(10, VGA.VGAMemory);
-			statement.setString(11, VGA.RamType);
-			statement.setString(12, VGA.MaxResolution);
-			statement.setString(13, VGA.Directx);
-			statement.setString(14, VGA.Size);
-			statement.setInt(15, VGA.WarrantyPeriod);
-			statement.setBoolean(16, VGA.IsDeleted);
-			statement.setString(17, VGA.Price);
-			statement.setString(18, VGA.Description);
-			statement.setInt(19, VGA.Quantity);
+							+ " , ? , ? , ? , ? , ? , ? , ? , ? , ? )");
+			statement.setString(1, VGA.Name);
+			statement.setString(2, VGA.Image);
+			statement.setString(3, VGA.TradeMark);
+			statement.setString(4, VGA.Label);
+			statement.setString(5, VGA.ChipsetManufacturer);
+			statement.setString(6, VGA.Model);
+			statement.setString(7, VGA.VGA1);
+			statement.setString(8, VGA.BoostClock);
+			statement.setString(9, VGA.VGAMemory);
+			statement.setString(10, VGA.RamType);
+			statement.setString(11, VGA.MaxResolution);
+			statement.setString(12, VGA.Directx);
+			statement.setString(13, VGA.Size);
+			statement.setInt(14, VGA.WarrantyPeriod);
+			statement.setBoolean(15, VGA.IsDeleted);
+			statement.setString(16, VGA.Price);
+			statement.setString(17, VGA.Description);
+			statement.setInt(18, VGA.Quantity);
 
 			statement.executeUpdate();
 			connection.close();
+			return true;
 		} catch (Exception e) {
 		}
 		return false;
@@ -57,8 +57,9 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 	public boolean DeleteVGA(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update [dbo].[VGA] set IsDeleted = true where Id = ?");
-			statement.setString(1, Integer.toString(Id));
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[VGA] set IsDeleted = ? where Id = ?");
+			statement.setBoolean(1,true);		
+			statement.setString(2,Integer.toString(Id));	
 			statement.executeUpdate();
 			connection.close();
 			return true;
@@ -91,8 +92,9 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 	public boolean RestoreVGA(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update [dbo].[VGA] set IsDelete = false where Id = ?");
-			statement.setString(1,Integer.toString(Id));		      
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[VGA] set IsDeleted = ? where Id = ?");
+			statement.setBoolean(1,false);		
+			statement.setString(2,Integer.toString(Id));		      
 			statement.executeUpdate ();
 			connection.close();
 			return true;
@@ -109,8 +111,10 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection
-					.prepareStatement("update [dbo].[VGA] set ? , ? , ? , ? , ? , ? , ? , ? , ?"
-							+ " , ? , ? , ? , ? , ? , ? , ? , ? where Id = ?");		
+					.prepareStatement("update [dbo].[VGA] set Name = ? , Image = ? , TradeMark = ? , Label = ? , ChipsetManufacturer = ? , "
+							+ " Model = ? , VGA = ? , BoostClock = ? , VGAMemory = ? "
+							+ " , RamType = ? , MaxResolution = ? , Directx = ? , Size = ? , WarrantyPeriod = ? , IsDeleted = ? , Price = ? , "
+							+ " Description = ? , Quantity = ? where Id = ?");		
 			statement.setString(1, VGA.Name);
 			statement.setString(2, VGA.Image);
 			statement.setString(3, VGA.TradeMark);
@@ -133,6 +137,7 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 			
 			statement.executeUpdate();
 			connection.close();
+			return true;
 		} catch (Exception e) {
 		}
 		return false;

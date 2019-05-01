@@ -63,11 +63,17 @@ public class CartService implements ICartRepository, ILoadCart {
 				detail.ID = rs.getInt("ID");
 				detail.CartId = rs.getInt("CartId");
 				detail.Quantity = rs.getInt("Quantity");
-				detail.type = rs.getString("type");
 				detail.ItemId = rs.getString("ItemId");
 				detail.price = rs.getString("price");
 				detail.Name = rs.getString("Name");
 				detail.Image = rs.getString("Image");
+				
+				String type = rs.getString("type");
+				detail.type = type;
+				if ( type.equals("RAM"))
+				{
+					detail.type = "Ram";
+				}
 				
 				CartDetails.add(detail);
 			}
@@ -281,6 +287,7 @@ public class CartService implements ICartRepository, ILoadCart {
 			connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[CartDetails] where ID = ?");
 			statement.setInt(1,detailsId);	
+			
 			ResultSet rs = statement.executeQuery();
 			int quantity = 0, ItemId = 0;
 			String type = "" ;
@@ -292,6 +299,7 @@ public class CartService implements ICartRepository, ILoadCart {
 			}
 			
 			statement = connection.prepareStatement("delete from [dbo].[CartDetails] where ID = ?");
+			statement.setInt(1,detailsId);	
 			statement.executeUpdate();
 
 			switch(type)
@@ -424,9 +432,16 @@ public class CartService implements ICartRepository, ILoadCart {
 			{
 				type = rs.getString("type");
 				ItemId = Integer.parseInt(rs.getString("ItemId"));
-				statement = connection.prepareStatement("update [dbo].[CartDetails] set Quantity = ?");
+				statement = connection.prepareStatement("update [dbo].[CartDetails] set Quantity = ? where ID = ?");
 				int quantiy = rs.getInt("Quantity") - 1;
 				statement.setInt(1, quantiy);
+				statement.setInt(2, detailsiD);
+				
+				if ( type.equals("Ram"))
+				{
+					type = "RAM";
+				}
+				statement.executeUpdate();
 			}
 			
 			switch(type)
@@ -545,9 +560,17 @@ public class CartService implements ICartRepository, ILoadCart {
 			{
 				type = rs.getString("type");
 				ItemId = Integer.parseInt(rs.getString("ItemId"));
-				statement = connection.prepareStatement("update [dbo].[CartDetails] set Quantity = ?");
+				statement = connection.prepareStatement("update [dbo].[CartDetails] set Quantity = ? where ID = ? ");
 				int quantiy = rs.getInt("Quantity") + 1;
 				statement.setInt(1, quantiy);
+				statement.setInt(2, detailsiD);
+				
+
+				if ( type.equals("Ram"))
+				{
+					type = "RAM";
+				}
+				statement.executeUpdate();
 			}
 			
 			switch(type)

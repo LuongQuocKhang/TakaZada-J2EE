@@ -7,81 +7,235 @@
    <!-- Base Define -->
    <definition name="base.definition" 
        template="/WEB-INF/Shared/_Layout.jsp">  
-       <put-attribute name="title" value="" />  
-       <put-attribute name="libary" value="/WEB-INF/Shared/libary.jsp" />  
-       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
-       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
-       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />  
+       <put-attribute name="title" value="" /> 
+       <put-attribute name="login" value="" />  
+       <put-attribute name="libary" value="" />    
+       <put-attribute name="header" value="" />  
+       <put-attribute name="navigation" value="" />  
        <put-attribute name="body" value="" />  
-       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" />  
+       <put-attribute name="footer" value="" />  
    </definition>  
+
+   <!-- ////////////////////////////////// ADMIN //////////////////////////////////////////  -->
+   <!-- Admin Login Page Define -->
+   <definition name="login" extends="base.definition"> 
+      <put-attribute name="title" value="Admin login page" /> 
+       <put-attribute name="body" value="/WEB-INF/Shared/LoginLayout.jsp" /> 
+   </definition>   
  
+   <!-- Admin Login Page Define -->
+   <definition name="adminhomepage" extends="base.definition"> 
+      <put-attribute name="title" value="Admin home page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/Shared/_AdminLayout.jsp" />
+   </definition> 
+    
+   <!-- Admin List Case Page Define -->
+   <definition name="admincase" extends="base.definition"> 
+      <put-attribute name="title" value="Admin list case page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/Case/AdminListCase.jsp" />
+   </definition> 
+   <definition name="AdminUpdateCase" extends="base.definition"> 
+      <put-attribute name="title" value="Admin update case page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/Case/UpdateCase.jsp" />
+   </definition>
+   <definition name="AddCase" extends="base.definition"> 
+      <put-attribute name="title" value="Admin add case page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/Case/AddCase.jsp" />
+   </definition>
+   
+     <definition name="admincomputer" extends="base.definition"> 
+      <put-attribute name="title" value="Admin list computer page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/Computer/AdminListComputer.jsp" />
+   </definition>
+   <definition name="AdminUpdateComputer" extends="base.definition"> 
+      <put-attribute name="title" value="Admin update computer page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/Computer/UpdateComputer.jsp" />
+   </definition>
+    <definition name="AddComputer" extends="base.definition"> 
+      <put-attribute name="title" value="Admin add computer page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/Computer/AddComputer.jsp" />
+   </definition>
+   
+   <definition name="adminram" extends="base.definition"> 
+      <put-attribute name="title" value="Admin list ram page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/RAM/AdminListRAM.jsp" />     
+   </definition>
+    <definition name="AdminUpdateRAM" extends="base.definition"> 
+      <put-attribute name="title" value="Admin update ram page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/RAM/UpdateRAM.jsp" />     
+   </definition>
+    <definition name="AddRAM" extends="base.definition"> 
+      <put-attribute name="title" value="Admin update ram page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/RAM/AddRAM.jsp" />     
+   </definition>
+   
+    <definition name="adminvga" extends="base.definition"> 
+      <put-attribute name="title" value="Admin list vga page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/VGA/AdminListVGA.jsp" />
+   </definition>
+   <definition name="AdminUpdateVGA" extends="base.definition"> 
+      <put-attribute name="title" value="Admin Update vga page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/VGA/UpdateVGA.jsp" />
+   </definition>
+    <definition name="AddVGA" extends="base.definition"> 
+      <put-attribute name="title" value="Admin Update vga page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/VGA/AddVGA.jsp" />
+   </definition>
+   
+   <definition name="admincpu" extends="base.definition"> 
+      <put-attribute name="title" value="Admin list cpu page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/CPU/AdminListCPU.jsp" />
+   </definition>
+    <definition name="AdminUpdateCPU" extends="base.definition"> 
+      <put-attribute name="title" value="Admin Update CPU page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/CPU/UpdateCPU.jsp" />
+   </definition>
+     <definition name="AddCPU" extends="base.definition"> 
+      <put-attribute name="title" value="Admin add CPU page" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_adminlibary.jsp" /> 
+       <put-attribute name="body" value="/WEB-INF/View/Admin/CPU/AddCPU.jsp" />
+   </definition>
+   <!-- ////////////////////////////////// USER //////////////////////////////////////////  -->
    <!-- Home Page -->
    <definition name="homePage" extends="base.definition">
        <put-attribute name="title" value="Home Page" />  
        <put-attribute name="body" value="/WEB-INF/View/Index.jsp" />  
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" /> 
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" />  
    </definition>  
    
      <!-- Cart Page -->
    <definition name="ShoppingCart" extends="base.definition">
-       <put-attribute name="title" value="Shopping cart" />  
+       <put-attribute name="title" value="Shopping cart" />     
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" />
        <put-attribute name="body" value="/WEB-INF/View/Cart/ShoppingCart.jsp" />  
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" /> 
    </definition> 
    
    <!-- List computer -->
    <definition name="ListComputer" extends="base.definition">
        <put-attribute name="title" value="Computer list" />  
        <put-attribute name="body" value="/WEB-INF/View/Computer/ListComputer.jsp" />  
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" />
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" /> 
    </definition>  
    <!-- computer detail -->
    <definition name="ComputerDetail" extends="base.definition">
        <put-attribute name="title" value="Computer Detail" />  
        <put-attribute name="body" value="/WEB-INF/View/Computer/ComputerDetail.jsp" />  
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" />
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" /> 
    </definition>  
-   
    
    <!-- List case -->
    <definition name="ListCase" extends="base.definition">
        <put-attribute name="title" value="Case list" />  
        <put-attribute name="body" value="/WEB-INF/View/Case/ListCase.jsp" />  
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" />
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" /> 
    </definition> 
     <!-- case detail -->
    <definition name="CaseDetail" extends="base.definition">
        <put-attribute name="title" value="Case Detail" />  
-       <put-attribute name="body" value="/WEB-INF/View/Case/CaseDetail.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/View/Case/CaseDetail.jsp" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" />
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" />  
    </definition> 
    
    <!-- List cpu -->
    <definition name="ListCPU" extends="base.definition">
        <put-attribute name="title" value="CPU list" />  
-       <put-attribute name="body" value="/WEB-INF/View/CPU/ListCPU.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/View/CPU/ListCPU.jsp" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" />
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" /> 
    </definition> 
     <!-- case detail -->
    <definition name="CPUDetail" extends="base.definition">
        <put-attribute name="title" value="CPU Detail" />  
-       <put-attribute name="body" value="/WEB-INF/View/CPU/CPUDetail.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/View/CPU/CPUDetail.jsp" />
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" />
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" />   
    </definition> 
    
      <!-- List ram -->
    <definition name="ListRAM" extends="base.definition">
        <put-attribute name="title" value="RAM list" />  
-       <put-attribute name="body" value="/WEB-INF/View/RAM/ListRAM.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/View/RAM/ListRAM.jsp" />
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" />
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" />   
    </definition> 
     <!-- ram detail -->
    <definition name="RAMDetail" extends="base.definition">
        <put-attribute name="title" value="RAM Detail" />  
-       <put-attribute name="body" value="/WEB-INF/View/RAM/RAMDetail.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/View/RAM/RAMDetail.jsp" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" />
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" />  
    </definition> 
    
      <!-- List vga -->
    <definition name="ListVGA" extends="base.definition">
        <put-attribute name="title" value="VGA list" />  
        <put-attribute name="body" value="/WEB-INF/View/VGA/ListVGA.jsp" />  
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" />
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" /> 
    </definition> 
     <!-- vga detail -->
    <definition name="VGADetail" extends="base.definition">
        <put-attribute name="title" value="VGA Detail" />  
-       <put-attribute name="body" value="/WEB-INF/View/VGA/VGADetail.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/View/VGA/VGADetail.jsp" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" /> 
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" /> 
    </definition> 
    
 </tiles-definitions>

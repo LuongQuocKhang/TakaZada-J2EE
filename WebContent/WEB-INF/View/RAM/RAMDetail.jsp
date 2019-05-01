@@ -286,7 +286,7 @@ $("#btnBuy").on('click', function () {
         {
             url: "<% out.print(request.getAttribute("domainname")); %>" + "/AddToCart/",
             method: "POST",
-            data: { "type": "RAM", "ItemId": "<% out.print(_ram.Id); %>", "Quantity": $(".value1").text(), "price": "<% out.print(_ram.Price); %>", "Id": "<% out.print(_ram.Id); %>", "Name": $("#Name").val(), "Image": $("#Image").val() },
+            data: { "type": "Ram", "ItemId": "<% out.print(_ram.Id); %>", "Quantity": $(".value1").text(), "price": "<% out.print(_ram.Price); %>", "Id": "<% out.print(_ram.Id); %>", "Name": $("#Name").val(), "Image": $("#Image").val() },
             success: function (response) {
                 if (response == true) {
                     $(function () {

@@ -25,23 +25,23 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection
 					.prepareStatement("insert into [dbo].[RAM] values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
-							+ " , ? , ? , ? , ? )");
-			statement.setInt(1, RAM.Id);
-			statement.setString(2, RAM.Name);
-			statement.setString(3, RAM.Image);
-			statement.setString(4, RAM.Description);
-			statement.setString(5, RAM.TradeMark);
-			statement.setString(6, RAM.Color);
-			statement.setString(7, RAM.RamType);
-			statement.setString(8, RAM.Memory);
-			statement.setString(9, RAM.BusSpeed);
-			statement.setInt(10, RAM.WarrantyPeriod);
-			statement.setBoolean(11, RAM.IsDeleted);
-			statement.setString(12, RAM.Price);
-			statement.setInt(13, RAM.Quantity);
+							+ " , ? , ? , ? )");
+			statement.setString(1, RAM.Name);
+			statement.setString(2, RAM.Image);
+			statement.setString(3, RAM.Description);
+			statement.setString(4, RAM.TradeMark);
+			statement.setString(5, RAM.Color);
+			statement.setString(6, RAM.RamType);
+			statement.setString(7, RAM.Memory);
+			statement.setString(8, RAM.BusSpeed);
+			statement.setInt(9, RAM.WarrantyPeriod);
+			statement.setBoolean(10, RAM.IsDeleted);
+			statement.setString(11, RAM.Price);
+			statement.setInt(12, RAM.Quantity);
 
 			statement.executeUpdate();
 			connection.close();
+			return true;
 		} catch (Exception e) {
 		}
 		return false;
@@ -51,8 +51,9 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 	public boolean DeleteRAM(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update [dbo].[RAM] set IsDeleted = true where Id = ?");
-			statement.setString(1, Integer.toString(Id));
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[RAM] set IsDeleted = ? where Id = ?");
+			statement.setBoolean(1,true);		
+			statement.setString(2,Integer.toString(Id));	
 			statement.executeUpdate();
 			connection.close();
 			return true;
@@ -85,8 +86,9 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 	public boolean RestoreRAM(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update [dbo].[RAM] set IsDelete = false where Id = ?");
-			statement.setString(1,Integer.toString(Id));		      
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[RAM] set IsDeleted = ? where Id = ?");
+			statement.setBoolean(1,false);		
+			statement.setString(2,Integer.toString(Id));	      
 			statement.executeUpdate ();
 			connection.close();
 			return true;
@@ -123,6 +125,7 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 			
 			statement.executeUpdate();
 			connection.close();
+			return true;
 		} catch (Exception e) {
 		}
 		return false;

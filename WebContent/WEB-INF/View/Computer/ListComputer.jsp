@@ -69,7 +69,7 @@
                 </div>
                 <%
                 	ArrayList<Computer> listcomputer = (ArrayList<Computer>)request.getAttribute("ListComputer");
-                	for ( int i = 1 ; i <= listcomputer.size() ; i++)
+                	for ( int i = 1 ; i < listcomputer.size() ; i++)
                 	{
                 		if ( i % 3 == 0 || i == 1)
                 		{
@@ -81,7 +81,6 @@
                 						out.print("<h5><a href=\"" + request.getAttribute("domainname") + "/ComputerDetail/" + listcomputer.get(i-1).Id + "\">" + listcomputer.get(i-1).Name + "</a></h5>");
                 						out.print("<div class=\"simpleCart_shelfItem\">");
                 							out.print("<i class=\"item_price\">" + listcomputer.get(i-1).Price + "</i></p>");
-                							out.print("<p><a class=\"item_add\" href=\"\">Add to cart</a></p>");
                 						out.print("</div>");
                 					out.print("</div>");
                 				out.print("</div>");

@@ -7,7 +7,7 @@
 <script src="<c:url value="/Resources/Scripts/js/Carousel.js"/>" ></script>
 <div class="banner" id="home1">
     <div class="container">
-        <h3>TakaZada <span>Computer world</span></h3>
+        <h3>TakaZada <span> Computer world </span></h3>
     </div>
 </div>
 <!-- //banner -->

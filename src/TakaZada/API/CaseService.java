@@ -26,26 +26,26 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 		{
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection.prepareStatement("insert into [dbo].[Case] values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
-					+ " , ? , ? , ? , ? , ? , ? , ? , ?)");
-			statement.setInt(1, Case.Id);
-			statement.setString(2, Case.Name);
-			statement.setString(3, Case.Image);
-			statement.setString(4, Case.Description);
-			statement.setInt(5, Case.WarrantyPeriod);
-			statement.setString(6, Case.TradeMark);
-			statement.setString(7, Case.Model);
-			statement.setString(8, Case.Color);
-			statement.setString(9, Case.Size);
-			statement.setString(10, Case.MainSupport);
-			statement.setString(11, Case.USB);
-			statement.setString(12, Case.DriverBays);
-			statement.setString(13, Case.Slots);
-			statement.setBoolean(14, Case.IsDelete);
-			statement.setString(15, Case.Price);
-			statement.setInt(16, Case.Quantity);
+					+ " , ? , ? , ? , ? , ? , ? )");
+			statement.setString(1, Case.Name);
+			statement.setString(2, Case.Image);
+			statement.setString(3, Case.Description);
+			statement.setInt(4, Case.WarrantyPeriod);
+			statement.setString(5, Case.TradeMark);
+			statement.setString(6, Case.Model);
+			statement.setString(7, Case.Color);
+			statement.setString(8, Case.Size);
+			statement.setString(9, Case.MainSupport);
+			statement.setString(10, Case.USB);
+			statement.setString(11, Case.DriverBays);
+			statement.setString(12, Case.Slots);
+			statement.setBoolean(13, Case.IsDelete);
+			statement.setString(14, Case.Price);
+			statement.setInt(15, Case.Quantity);
 			
 			statement.executeUpdate();
 			connection.close();
+			return true;
 		}
 		catch(Exception e) {}
 		return false;
@@ -55,8 +55,9 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 	public boolean DeleteCase(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update [dbo].[Case] set IsDelete = true where Id = ?");
-			statement.setString(1,Integer.toString(Id));		      
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[Case] set IsDelete = ? where Id = ?");
+			statement.setBoolean(1,true);		
+			statement.setString(2,Integer.toString(Id));		      
 			statement.executeUpdate ();
 			connection.close();
 			return true;
@@ -89,8 +90,9 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 	public boolean RestoreCase(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update [dbo].[Case] set IsDelete = false where Id = ?");
-			statement.setString(1,Integer.toString(Id));		      
+			PreparedStatement statement = connection.prepareStatement("update [dbo].[Case] set IsDelete = ? where Id = ?");
+			statement.setBoolean(1,false);		
+			statement.setString(2,Integer.toString(Id));		    	      
 			statement.executeUpdate ();
 			connection.close();
 			return true;

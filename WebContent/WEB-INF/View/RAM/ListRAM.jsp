@@ -75,8 +75,7 @@
                 						out.print(" <img src=" + request.getAttribute("domainname") + "/Resources/Content/Pictures/Ram/" + listram.get(i-1).Image.replace(" ", "%20") + " \"" + "alt=\"\" class=\"img-responsive\" style=\" width: 200px;height: 170px;\" />");
                 						out.print("<h5><a href=\"" + request.getAttribute("domainname") + "/RAMDetail/" + listram.get(i-1).Id + "\">" + listram.get(i-1).Name + "</a></h5>");
                 						out.print("<div class=\"simpleCart_shelfItem\">");
-                							out.print("<i class=\"item_price\">" + listram.get(i-1).Price + "</i></p>");
-                							out.print("<p><a class=\"item_add\" href=\"\">Add to cart</a></p>");
+                							out.print("<i class=\"item_price\">" + listram.get(i-1).Price + "</i></p>");              							
                 						out.print("</div>");
                 					out.print("</div>");
                 				out.print("</div>");

@@ -234,35 +234,34 @@ public class ComputerService implements IComputerReponsitory , ILoad{
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection.prepareStatement("insert into computer values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
-					+ " , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?"
-					+ " , ? , ? , ? , ?)");	     
-			statement.setInt(1,computer.Id);
-			statement.setString(2,computer.Name);
-			statement.setString(3,computer.Image);
-			statement.setString(4,computer.CPU);
-			statement.setString(5,computer.RAM);
-			statement.setString(6,computer.VideoCard);
-			statement.setString(7,computer.Hardware);
-			statement.setString(8,computer.SlotSupport);
-			statement.setString(9,computer.Display);
-			statement.setString(10,computer.Port);
-			statement.setString(11,computer.Extra);
-			statement.setString(12,computer.OS);
-			statement.setString(13,computer.Type);
-			statement.setString(14,computer.Trademark);
-			statement.setString(15,computer.Feature);
-			statement.setString(16,computer.Color);
-			statement.setString(17,computer.CPUSeries);
-			statement.setString(18,computer.ScreenSize);
-			statement.setString(19,computer.Resolution);
-			statement.setString(20,computer.StandardOfScreen);
-			statement.setString(21,computer.Size);
-			statement.setString(22,computer.Mass);
-			statement.setInt(23,computer.WarrantyPeriod);
-			statement.setBoolean(24,computer.IsDeleted);
-			statement.setString(25,computer.Price);
-			statement.setString(26,computer.Description);
-			statement.setInt(27,computer.Quantity);
+					+ " , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?"
+					+ " , ? , ? , ?)");	  
+			statement.setString(1,computer.Name);
+			statement.setString(2,computer.Image);
+			statement.setString(3,computer.CPU);
+			statement.setString(4,computer.RAM);
+			statement.setString(5,computer.VideoCard);
+			statement.setString(6,computer.Hardware);
+			statement.setString(7,computer.SlotSupport);
+			statement.setString(8,computer.Display);
+			statement.setString(9,computer.Port);
+			statement.setString(10,computer.Extra);
+			statement.setString(11,computer.OS);
+			statement.setString(12,computer.Type);
+			statement.setString(13,computer.Trademark);
+			statement.setString(14,computer.Feature);
+			statement.setString(15,computer.Color);
+			statement.setString(16,computer.CPUSeries);
+			statement.setString(17,computer.ScreenSize);
+			statement.setString(18,computer.Resolution);
+			statement.setString(19,computer.StandardOfScreen);
+			statement.setString(20,computer.Size);
+			statement.setString(21,computer.Mass);
+			statement.setInt(22,computer.WarrantyPeriod);
+			statement.setBoolean(23,computer.IsDeleted);
+			statement.setString(24,computer.Price);
+			statement.setString(25,computer.Description);
+			statement.setInt(26,computer.Quantity);
 			
 			statement.executeUpdate();
 			connection.close();
@@ -279,8 +278,9 @@ public class ComputerService implements IComputerReponsitory , ILoad{
 	public boolean DeleteComputer(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update computer set IsDeleted = true where Id = ?");
-			statement.setString(1,Integer.toString(Id));		      
+			PreparedStatement statement = connection.prepareStatement("update computer set IsDeleted = ? where Id = ?");
+			statement.setBoolean(1,true);		
+			statement.setString(2,Integer.toString(Id));			      
 			statement.executeUpdate ();
 			connection.close();
 			return true;
@@ -313,8 +313,9 @@ public class ComputerService implements IComputerReponsitory , ILoad{
 	public boolean RestoreComputer(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update computer set IsDeleted = false where Id = ?");
-			statement.setString(1,Integer.toString(Id));		      
+			PreparedStatement statement = connection.prepareStatement("update computer set IsDeleted = ? where Id = ?");
+			statement.setBoolean(1,false);		
+			statement.setString(2,Integer.toString(Id));	      
 			statement.executeUpdate ();
 			connection.close();
 			return true;
@@ -334,7 +335,7 @@ public class ComputerService implements IComputerReponsitory , ILoad{
 					+ "Name = ?" + " ,Image = ?" + " ,CPU = ?" + " ,RAM = ?" + " ,VideoCard = ?" + " ,Hardware = ?" + " ,SlotSupport = ?" + " ,Display = ?" + " ,Port = ?"
 					+ " ,Extra = ?" + " ,OS = ?" + " ,Type = ?" + " ,Trademark = ?" + " ,Feature = ?" + " ,Color = ?" + " ,CPUSeries = ?" + " ,ScreenSize = ?" + " ,Resolution = ?"
 					+ " ,StandardOfScreen = ?" + " ,Size = ?" + " ,Mass = ?" + " ,WarrantyPeriod = ?" + " ,IsDeleted = ? " + " ,Price = ?" + " ,Description = ?" + " ,Quantity = ?"
-					+ "where Id = ?");
+					+ " where Id = ?");
 			statement.setString(1,computer.Name);
 			statement.setString(2,computer.Image);
 			statement.setString(3,computer.CPU);

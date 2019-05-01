@@ -25,28 +25,28 @@ public class CPUService implements ILoadCPU, ICPUReponsitory {
 		{
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
 			PreparedStatement statement = connection.prepareStatement("insert into cpu values( ? , ? , ? , ? , ? , ? , ? , ? , ?"
-					+ " , ? , ? , ? , ? , ? , ? , ? , ? , ?)");
-			statement.setInt(1, CPU.Id);
-			statement.setString(2, CPU.Name);
-			statement.setString(3, CPU.Image);
-			statement.setInt(4, CPU.WarrantyPeriod);
-			statement.setString(5, CPU.TradeMark);
-			statement.setString(6, CPU.CPUType);
-			statement.setString(7, CPU.CPULine);
-			statement.setInt(8, CPU.CoreNum);
-			statement.setInt(9, CPU.ThreadNum);
-			statement.setString(10, CPU.CoreCPU);
-			statement.setString(11, CPU.BasicPulse);
-			statement.setString(12, CPU.MaxPulse);
-			statement.setString(13, CPU.CacheCPU);
-			statement.setString(14, CPU.Size);
-			statement.setString(15, CPU.Description);	
-			statement.setBoolean(16, CPU.IsDeleted);
-			statement.setString(17, CPU.Price);
-			statement.setInt(18, CPU.Quantity);
+					+ " , ? , ? , ? , ? , ? , ? , ? , ? )");
+			statement.setString(1, CPU.Name);
+			statement.setString(2, CPU.Image);
+			statement.setInt(3, CPU.WarrantyPeriod);
+			statement.setString(4, CPU.TradeMark);
+			statement.setString(5, CPU.CPUType);
+			statement.setString(6, CPU.CPULine);
+			statement.setInt(7, CPU.CoreNum);
+			statement.setInt(8, CPU.ThreadNum);
+			statement.setString(9, CPU.CoreCPU);
+			statement.setString(10, CPU.BasicPulse);
+			statement.setString(11, CPU.MaxPulse);
+			statement.setString(12, CPU.CacheCPU);
+			statement.setString(13, CPU.Size);
+			statement.setString(14, CPU.Description);	
+			statement.setBoolean(15, CPU.IsDeleted);
+			statement.setString(16, CPU.Price);
+			statement.setInt(17, CPU.Quantity);
 			
 			statement.executeUpdate();
 			connection.close();
+			return true;
 		}
 		catch(Exception e) {}
 		return false;
@@ -56,8 +56,9 @@ public class CPUService implements ILoadCPU, ICPUReponsitory {
 	public boolean DeleteCPU(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update cpu set IsDeleted = true where Id = ?");
-			statement.setString(1,Integer.toString(Id));		      
+			PreparedStatement statement = connection.prepareStatement("update cpu set IsDeleted = ? where Id = ?");
+			statement.setBoolean(1,true);		
+			statement.setString(2,Integer.toString(Id));		      
 			statement.executeUpdate ();
 			connection.close();
 			return true;
@@ -90,8 +91,9 @@ public class CPUService implements ILoadCPU, ICPUReponsitory {
 	public boolean RestoreCPU(int Id) {
 		try {
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update cpu set IsDelete = false where Id = ?");
-			statement.setString(1,Integer.toString(Id));		      
+			PreparedStatement statement = connection.prepareStatement("update cpu set IsDeleted = ? where Id = ?");
+			statement.setBoolean(1,false);		
+			statement.setString(2,Integer.toString(Id));		      
 			statement.executeUpdate ();
 			connection.close();
 			return true;
@@ -108,8 +110,10 @@ public class CPUService implements ILoadCPU, ICPUReponsitory {
 		try
 		{
 			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
-			PreparedStatement statement = connection.prepareStatement("update cpu set ? , ? , ? , ? , ? , ? , ? , ? , ?"
-					+ " , ? , ? , ? , ? , ? , ? , ? , ? where Id = ?");
+			PreparedStatement statement = connection.prepareStatement("update cpu set Name = ? , Image = ? , WarrantyPeriod = ? , TradeMark = ? , CPUType = ? , "
+					+ "CPULine = ? , CoreNum = ? , ThreadNum = ? , CoreCPU = ?"
+					+ " , BasicPulse = ? , MaxPulse = ? , CacheCPU = ? , Size = ? , "
+					+ " Description = ? , IsDeleted = ? , Price = ? , Quantity = ? where Id = ?");
 
 			statement.setString(1, CPU.Name);
 			statement.setString(2, CPU.Image);
@@ -128,7 +132,6 @@ public class CPUService implements ILoadCPU, ICPUReponsitory {
 			statement.setBoolean(15, CPU.IsDeleted);
 			statement.setString(16, CPU.Price);
 			statement.setInt(17, CPU.Quantity);
-			
 			statement.setInt(18, CPU.Id);
 			statement.executeUpdate();
 			connection.close();
