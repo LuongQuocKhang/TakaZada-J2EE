@@ -1,4 +1,5 @@
 <%@page import="TakaZada.Model.UserLogin"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="header">
         <div class="container">
@@ -20,16 +21,12 @@
                 <input class="search_box" type="checkbox" id="search_box">
                 <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
                 <div class="search_form">
-                    <form action="" method="post" style="width: 100%; height: 100%">
+                    <form action="/TakaZada/Search" method="post" style="width: 100%; height: 100%">
                         <select id="SearchCondition" name="SearchCondition" class="col-md-3">
                             <option value="Case">Case</option>
                             <option value="Computer">Computer</option>
                             <option value="CPU">CPU</option>
-                            <option value="Hardware">Hardware</option>
-                            <option value="Keyboard">Keyboard</option>
-                            <option value="Mainboard">Mainboard</option>
                             <option value="RAM">RAM</option>
-                            <option value="Radiator">Radiator</option>
                             <option value="VGA">VGA</option>
                             <option value="Tất cả">Tất cả</option>
                         </select>

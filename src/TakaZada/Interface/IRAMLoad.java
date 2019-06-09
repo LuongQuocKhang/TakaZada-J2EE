@@ -8,4 +8,5 @@ public interface IRAMLoad {
 	 ArrayList<RAM> LoadByTrademark(String Trademark);
 	 ArrayList<RAM> LoadTheSameTrademark(String Trademark,int Id);
      RAM LoadById(int Id);
+	ArrayList<RAM> LoadByName(String Name);
 }

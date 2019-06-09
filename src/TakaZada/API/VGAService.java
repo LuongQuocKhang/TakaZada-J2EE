@@ -232,6 +232,49 @@ public class VGAService implements IVGALoad, IVGAReponsitory {
 		return vgalist;
 	}
 	@Override
+	public ArrayList<VGA> LoadByName(String Name) {
+		ArrayList<TakaZada.Model.VGA> vgalist = new ArrayList<TakaZada.Model.VGA>();
+		try {
+			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[VGA] where CHARINDEX( ?, Name) > 0");
+			statement.setString(1,Name);		
+			ResultSet rs = statement.executeQuery();
+
+			 while (rs.next()) 
+			 {
+				 TakaZada.Model.VGA _vga = new TakaZada.Model.VGA();
+				 _vga.Id = rs.getInt("Id");
+				 _vga.Name = rs.getString("Name");
+				 _vga.Image = rs.getString("Image");
+				 _vga.WarrantyPeriod = rs.getInt("WarrantyPeriod");
+				 _vga.TradeMark = rs.getString("TradeMark");
+				 _vga.Label = rs.getString("Label");
+				 _vga.ChipsetManufacturer = rs.getString("ChipsetManufacturer");
+				 _vga.Model = rs.getString("Model");
+				 _vga.VGA1 = rs.getString("VGA");
+				 _vga.BoostClock = rs.getString("BoostClock");
+				 _vga.VGAMemory = rs.getString("VGAMemory");
+				 _vga.RamType = rs.getString("RamType");
+				 _vga.MaxResolution = rs.getString("MaxResolution");
+				 _vga.Directx = rs.getString("Directx");
+				 _vga.Size = rs.getString("Size");
+				 _vga.Description = rs.getString("Description");
+				 _vga.IsDeleted = rs.getBoolean("IsDeleted");
+				 _vga.Price = rs.getString("Price");
+				 _vga.Quantity = rs.getInt("Quantity");
+				 
+				 vgalist.add(_vga);
+		     }
+			
+			connection.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return vgalist;
+	}
+	@Override
 	public ArrayList<VGA> LoadTheSameTrademark(String Trademark, int Id) {
 		ArrayList<TakaZada.Model.VGA> vgalist = new ArrayList<TakaZada.Model.VGA>();
 		try {

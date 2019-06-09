@@ -1,4 +1,6 @@
 package TakaZada.Interface;
+import java.util.ArrayList;
+
 import TakaZada.Model.Computer;
 
 public interface IComputerReponsitory {
@@ -9,4 +11,5 @@ public interface IComputerReponsitory {
     boolean DeleteComputerFromDeletedlist(int Id);
     boolean RestoreComputer(int Id);
     boolean UpdateComputer(Computer computer);
+	ArrayList<Computer> LoadByName(String Name);
 }

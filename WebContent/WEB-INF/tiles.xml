@@ -238,4 +238,14 @@
        <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" /> 
    </definition> 
    
+    <!-- search -->
+   <definition name="Search" extends="base.definition">
+       <put-attribute name="title" value="Search" />  
+       <put-attribute name="body" value="/WEB-INF/View/Search/SearchQuery.jsp" /> 
+       <put-attribute name="libary" value="/WEB-INF/Shared/_libary.jsp" /> 
+       <put-attribute name="login" value="/WEB-INF/Shared/_Login.jsp" />  
+       <put-attribute name="header" value="/WEB-INF/Shared/_header.jsp" />  
+       <put-attribute name="navigation" value="/WEB-INF/Shared/_navigation.jsp" />   
+       <put-attribute name="footer" value="/WEB-INF/Shared/_footer.jsp" /> 
+   </definition> 
 </tiles-definitions>

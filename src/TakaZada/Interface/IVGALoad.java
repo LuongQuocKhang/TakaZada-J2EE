@@ -8,4 +8,5 @@ public interface IVGALoad {
 	 ArrayList<VGA> LoadByTrademark(String Trademark);
      VGA LoadById(int Id);
      ArrayList<VGA> LoadTheSameTrademark(String Trademark, int Id);
+	ArrayList<VGA> LoadByName(String Name);
 }

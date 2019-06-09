@@ -5,6 +5,7 @@ encoding//WebContent/WEB-INF/Shared/_navigation.jsp=UTF-8
 encoding//WebContent/WEB-INF/View/Index.jsp=UTF-8
 encoding//src/TakaZada/API/ComputerService.java=UTF-8
 encoding//src/TakaZada/API/ReceiptService.java=UTF-8
+encoding//src/TakaZada/API/SearchService.java=UTF-8
 encoding//src/TakaZada/Controller/CPUController.java=UTF-8
 encoding//src/TakaZada/Controller/CaseController.java=UTF-8
 encoding//src/TakaZada/Controller/ComputerController.java=UTF-8

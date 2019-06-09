@@ -209,6 +209,44 @@ public class RAMService implements IRAMLoad, IRAMRepository {
 		return ramlist;
 	}
 	@Override
+	public ArrayList<RAM> LoadByName(String Name) {
+		ArrayList<TakaZada.Model.RAM> ramlist = new ArrayList<TakaZada.Model.RAM>();
+		try {
+			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[RAM] where CHARINDEX( ?, Name) > 0");
+			statement.setString(1,Name);	
+		      
+			ResultSet rs = statement.executeQuery();
+
+			 while (rs.next()) 
+			 {
+				 TakaZada.Model.RAM _ram = new TakaZada.Model.RAM();
+				 _ram.Id = rs.getInt("Id");
+				 _ram.Name = rs.getString("Name");
+				 _ram.Image = rs.getString("Image");
+				 _ram.WarrantyPeriod = rs.getInt("WarrantyPeriod");
+				 _ram.TradeMark = rs.getString("TradeMark");
+				 _ram.Description = rs.getString("Description");
+				 _ram.Color = rs.getString("Color");
+				 _ram.RamType = rs.getString("RamType");
+				 _ram.Memory = rs.getString("Memory");
+				 _ram.BusSpeed = rs.getString("BusSpeed");
+				 _ram.IsDeleted = rs.getBoolean("IsDeleted");
+				 _ram.Price = rs.getString("Price");
+				 _ram.Quantity = rs.getInt("Quantity");
+				 
+				 ramlist.add(_ram);
+		     }
+			
+			connection.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ramlist;
+	}
+	@Override
 	public ArrayList<RAM> LoadTheSameTrademark(String Trademark , int Id) {
 		ArrayList<TakaZada.Model.RAM> ramlist = new ArrayList<TakaZada.Model.RAM>();
 		try {

@@ -222,6 +222,47 @@ public class CaseService implements ILoadCase, ICaseReponsitory {
 		return caselist;
 	}
 	@Override
+	public ArrayList<Case> LoadByName(String Name) {
+		ArrayList<TakaZada.Model.Case> caselist = new ArrayList<TakaZada.Model.Case>();
+		try {
+			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
+			PreparedStatement statement = connection.prepareStatement("select * from [dbo].[Case] where CHARINDEX( ? , Name) > 0");
+			statement.setString(1,Name);	
+		    
+			ResultSet rs = statement.executeQuery();
+
+			 while (rs.next()) 
+			 {
+				 TakaZada.Model.Case _case = new TakaZada.Model.Case();
+				 _case.Id = rs.getInt("Id");
+				 _case.Name = rs.getString("Name");
+				 _case.Image = rs.getString("Image");
+				 _case.Description = rs.getString("Description");
+				 _case.WarrantyPeriod = rs.getInt("WarrantyPeriod");
+				 _case.TradeMark = rs.getString("TradeMark");
+				 _case.Model = rs.getString("Model");
+				 _case.Color = rs.getString("Color");
+				 _case.Size = rs.getString("Size");
+				 _case.MainSupport = rs.getString("MainSupport");
+				 _case.USB = rs.getString("USB");
+				 _case.DriverBays = rs.getString("DriverBays");
+				 _case.Slots = rs.getString("Slots");
+				 _case.IsDelete = rs.getBoolean("IsDelete");
+				 _case.Price = rs.getString("Price");
+				 _case.Quantity = rs.getInt("Quantity");
+				 
+				 caselist.add(_case);
+		     }
+			
+			connection.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return caselist;
+	}
+	@Override
 	public ArrayList<Case> LoadTheSameTrademark(String Trademark,int Id) {
 		ArrayList<TakaZada.Model.Case> caselist = new ArrayList<TakaZada.Model.Case>();
 		try {

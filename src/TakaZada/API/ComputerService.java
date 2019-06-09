@@ -374,5 +374,56 @@ public class ComputerService implements IComputerReponsitory , ILoad{
 		}
 		return false;
 	}
+	@Override
+	public ArrayList<TakaZada.Model.Computer> LoadByName(String Name) {
+		ArrayList<TakaZada.Model.Computer> computerlist = new ArrayList<TakaZada.Model.Computer>();
+		try {
+			Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection_SQLJDBC();
+			PreparedStatement statement = connection.prepareStatement("select * from computer where CHARINDEX( ? , Name) > 0");
+			statement.setString(1,Name);
+			
+			ResultSet rs = statement.executeQuery();
 
+			 while (rs.next()) 
+			 {
+				 TakaZada.Model.Computer _computer = new TakaZada.Model.Computer();
+				 _computer.Id = rs.getInt("Id");
+				 _computer.Name = rs.getString("Name");
+				 _computer.Image = rs.getString("Image");
+				 _computer.CPU = rs.getString("CPU");
+				 _computer.RAM = rs.getString("RAM");
+				 _computer.VideoCard = rs.getString("VideoCard");
+				 _computer.Hardware = rs.getString("Hardware");
+				 _computer.SlotSupport = rs.getString("SlotSupport");
+				 _computer.Display = rs.getString("Display");
+				 _computer.Port = rs.getString("Port");
+				 _computer.Extra = rs.getString("Extra");
+				 _computer.OS = rs.getString("OS");
+				 _computer.Type = rs.getString("Type");
+				 _computer.Trademark = rs.getString("Trademark");
+				 _computer.Feature = rs.getString("Feature");
+				 _computer.Color = rs.getString("Color");
+				 _computer.CPUSeries = rs.getString("CPUSeries");
+				 _computer.ScreenSize = rs.getString("ScreenSize");
+				 _computer.Resolution = rs.getString("Resolution");
+				 _computer.StandardOfScreen = rs.getString("StandardOfScreen");
+				 _computer.Size = rs.getString("Size");
+				 _computer.Mass = rs.getString("Mass");
+				 _computer.WarrantyPeriod = rs.getInt("WarrantyPeriod");
+				 _computer.IsDeleted = rs.getBoolean("IsDeleted");
+				 _computer.Price = rs.getString("Price");
+				 _computer.Description = rs.getString("Description");
+				 _computer.Quantity = rs.getInt("Quantity");
+				 
+				 computerlist.add(_computer);
+		     }
+			
+			connection.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return computerlist;
+	}
 }

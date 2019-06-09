@@ -18,11 +18,14 @@ import TakaZada.API.CPUService;
 import TakaZada.API.CaseService;
 import TakaZada.API.ComputerService;
 import TakaZada.API.RAMService;
+import TakaZada.API.SearchService;
 import TakaZada.API.VGAService;
+import TakaZada.Interface.ISearchQuerry;
 import TakaZada.Model.CPU;
 import TakaZada.Model.Case;
 import TakaZada.Model.Computer;
 import TakaZada.Model.RAM;
+import TakaZada.Model.SearchItem;
 import TakaZada.Model.VGA;
 
 @Controller
@@ -33,6 +36,7 @@ public class HomeController {
 	CaseService _caseService;
 	ComputerService _computerService;	
 	AdminService _adminService;
+	ISearchQuerry _SearchService;
 	
 	public HomeController()
 	{
@@ -42,6 +46,7 @@ public class HomeController {
 		_caseService = new CaseService();
 		_computerService = new ComputerService();	
 		_adminService = new AdminService();
+		_SearchService = new SearchService();
 	}
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
 	public String home(@Autowired HttpServletRequest request)
@@ -72,6 +77,17 @@ public class HomeController {
 			request.getSession().setAttribute("USER_SESSION", _adminService.GetUserByEmail(email));
 		}
 		return "redirect:/";
+	}
+	@RequestMapping(value = {"/Search"}, method = RequestMethod.POST)
+	public String Search(HttpServletRequest request)
+	{	
+		String type = (String) request.getParameter("SearchCondition");
+		String Name = (String) request.getParameter("SearchResult");
+		
+		ArrayList<SearchItem> listsearchitem = _SearchService.Search(type,Name);
+		request.setAttribute("ListSearchItem", listsearchitem);
+		request.setAttribute("domainname", request.getContextPath());
+		return "Search";
 	}
 	@RequestMapping(value = {"/Register"}, method = RequestMethod.POST)
 	public String Register(HttpServletRequest request)
